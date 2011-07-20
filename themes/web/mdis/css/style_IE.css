@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+/* main */
+.header .menu .rightblock a { padding:0; font-weight:bold; color:#335c91; text-decoration:none; background:url(images/button_white.gif) repeat-x top;}
+.header .menu .rightblock a img { margin:-4px 0; padding:0 4px 0 8px; border:none;}
+.header .menu .rightblock a span { padding:0; background:url(images/button_white_left.gif) no-repeat top left;}
+.header .menu .rightblock a span span { padding:5px 12px 5px 0; background:url(images/button_white_right.gif) no-repeat top right;}
+
+/* content */
+.leftblock { margin-right:5px; float:left; width:762px;}
+.leftblock .gadget { margin:0 5px 12px 0;}
+.gadget a.colourbutton { display:inline; height:29px; margin:16px 0 0 0; padding:0; color:#fff; text-decoration:none; line-height:14px;}
+.gadget a.colourbutton span { display:inline; margin:0; padding:0;													}
+.gadget a.colourbutton span span { margin:0 10px; padding:6px 7px 8px 5px;													aborder:1px solid #F00;}
+.gadgets3par { margin:0; padding:0;}
+.gadget3inline { margin-left:0; float:left; width:249px;}
+input.mini { margin:-4px 0 -12px 0;}
+
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
+.ui-datepicker-cover {
+    display: none; /*sorry for IE5*/
+    display/**/: block; /*sorry for IE5*/
+    position: absolute; /*must have*/
+    z-index: -1; /*must have*/
+    filter: mask(); /*must have*/
+    top: -4px; /*must have*/
+    left: -4px; /*must have*/
+    width: 200px; /*must have*/
+    height: 200px; /*must have*/
+}

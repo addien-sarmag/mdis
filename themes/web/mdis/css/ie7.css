@@ -1,0 +1,44 @@
+
+/* notifications */
+.notification.success {
+    background:#effeb9 url('../images/icons/notifications/success.gif') no-repeat 10px 10px;
+    border-color:#98c700;
+}
+.notification.error {
+    background:#fccac3 url('../images/icons/notifications/error.gif') no-repeat 10px 10px;
+    border-color:#ea5338;
+}
+.notification.warning {
+    background:#ffeaa7 url('../images/icons/notifications/warning.gif') no-repeat 10px 10px;
+    border-color:#f9b418;
+}
+.notification.info {
+    background:#d1e4f3 url('../images/icons/notifications/info.gif') no-repeat 10px 10px;
+    border-color:#4d8fcc;
+}
+.notification.tip {
+    background:#feeac9 url('../images/icons/notifications/tip.gif') no-repeat 10px 10px;
+    border-color:#d38e49;
+}
+.notification {
+    border-width:1px;
+    border-style:solid;
+    padding:17px 17px 17px 55px;
+    margin-bottom:15px;
+    -moz-border-radius:3px;
+    -webkit-border:3px;
+    border-radius:3px;
+}
+.notification .close {
+    background:url("../images/icons/small/close.png") no-repeat scroll 0 0 transparent;
+    cursor:pointer;
+    display:block;
+    float:right;
+    height:16px;
+    margin-top:2px;
+    opacity:0.7;
+    width:16px;
+}
+.notification .close:hover {
+    opacity:1;
+}
