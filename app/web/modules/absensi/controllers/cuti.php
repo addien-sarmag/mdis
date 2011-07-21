@@ -17,7 +17,6 @@ class cuti extends Controller {
     }
     public function index() {
         redirect ( 'absensi/cuti/view' );
-	echo 'tes';
     }
     protected function _executeView() {
         $array = $this->uri->uri_to_assoc ( 3, array ('id', 'action' ) );
