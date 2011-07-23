@@ -1,0 +1,63 @@
+Poin poin meeting:
+
+1. data NIP
+      - dema : manual
+      - putra : autogenerate
+
+	Keputusan: NIP akan dilakukan manual ( fixed ), tapi dengan ada validasi input NIP sebbelumnya.
+
+2. pengobatan dihilangkan 
+
+3. pegawai - tidak ada departemen, hanya berdasarkan posisi / jabatan (nkb dan mdis) -- bisa dicustom (ditambah sendiri)  
+
+4. menu ring hanya ada untuk mdis, nkb tidak ada menu ring.
+
+5. menu pengalaman kerja dijadikan satu di daftar pegawai
+
+6. rekaman hutang pindah ke laporan ( menu transaksi hilang )
+
+-- end kepegawaian
+
+-- Absensi
+
+1. Master Absensi : - jam masuk, jam pulang
+		    - jumlah hari kerja  
+
+2. Rekaman Absensi : - jam masuk pegawai, jam pulang pegawai ( tidak hitung total jam )
+		     - hari kerja (senin - jumat)-> berpengaruh ke transport dan makan
+		     - keterangan hari kerja (jika hari kerja tidak lengkap)
+		     - form pdf sendiri untuk laporan absensi
+
+3. menu permintaan/permohonan izin tidak diadakan
+
+4. master lembur ( permintaan lembur dijadikan satu dengan lembur absensi ) -- data lembur dihilangkan.
+
+5. Cuti. - master jenis cuti
+	 - rekaman cuti -- menu tambah, laporan ada di dalam satu menu, sisa cuti di dalam menu rekaman cuti
+
+tabel jenis cuti  		   
+-hitungan lembur adalah dari lewat jam normal pulang pegawai.
+-lembur harus dengan acc dari atasan, jadi walaupun jam keluar pegawai lewat dari jam pulang normal akan tetapi tidak ada acc dari atasan, maka tidak dikatakan lembur.
+
+-- end absensi
+
+-- menu penilaian pegawai tidak ada
+
+-- payroll
+
+1. setup tunjangan + potongan -- hardcode -- tidak ada UI untuk setup
+
+2. Formula Gaji -- set hardcode -- fungsi formula -- tidak ada UI untuk setup
+
+3. Periode penggajian -- set hardcode -- tidak ada UI untuk setup
+
+4. jamsostek, pph21, spt masuk tabel.
+
+
+-- end payroll
+
+-- transport dan uang 
+
+--- tanggal 25 juli -> pengiriman invoice tahap kedua + demo aplikasi 50% -> web, hr sistem.
+--- tgl 21 febru, dema, putra, fokus pembuatan aplikasi.
+--- 
