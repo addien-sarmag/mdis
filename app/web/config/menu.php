@@ -137,69 +137,16 @@ $config['menu'] = array(
 				),
 			)
   	),
-      array(
-        'title' => 'History Pegawai',
-        'url' => '',
-        'is_url' => false,
-        'accessModule' => false,
-        'accessController' => false,
-       	'accessAction' => false,
-        'is_child'=> true,
-        'child' =>  array(
-				array(
-					'title' => 'Pengalaman Kerja',
-					'url' => 'pegawai/pengalamanKerja/view',
-					'is_url' => true,
-					'accessModule' => false,
-					'accessController' => false,
-					'accessAction' => array(array('module'=>'pegawai','controller'=>'pengalamanKerja','action'=>'view')),
-					'is_child'=> true,
-					'child' =>  array()
-				),
-				array(
-					'title' => 'Kontrak',
-					'url' => 'pegawai/kontrakPegawai/view',
-					'is_url' => true,
-					'accessModule' => false,
-					'accessController' => false,
-					'accessAction' => array(array('module'=>'pegawai','controller'=>'kontrakPegawai','action'=>'view')),
-					'is_child'=> true,
-					'child' =>  array()
-				),
-			)
-  	),
         array(
-        'title' => 'Transaksi Pegawai',
-        'url' => '',
-        'is_url' => false,
-        'accessModule' => false,
-        'accessController' => false,
-       	'accessAction' => false,
-        'is_child'=> true,
-        'child' =>  array(
-				array(
-					'title' => 'Rekaman Pengobatan',
-					'url' => 'pegawai/pengobatan/view',
-					'is_url' => true,
-					'accessModule' => false,
-					'accessController' => false,
-					'accessAction' => array(array('module'=>'pegawai','controller'=>'rekamanPengobatan','action'=>'view')),
-					'is_child'=> true,
-					'child' =>  array()
-				),
-				array(
-					'title' => 'Rekaman Hutang',
-					'url' => 'pegawai/hutang/view',
-					'is_url' => true,
-					'accessModule' => false,
-					'accessController' => false,
-					'accessAction' => array(array('module'=>'pegawai','controller'=>'rekamanHutang','action'=>'view')),
-					'is_child'=> true,
-					'child' =>  array()
-				),
-                                
-			)
-        ),
+	    'title' => 'Kontrak',
+	    'url' => 'pegawai/kontrakPegawai/view',
+	    'is_url' => true,
+	    'accessModule' => false,
+	    'accessController' => false,
+	    'accessAction' => array(array('module'=>'pegawai','controller'=>'kontrakPegawai','action'=>'view')),
+	    'is_child'=> true,
+	    'child' =>  array()
+	),
         array(
         'title' => 'Laporan',
         'url' => '',
@@ -218,14 +165,23 @@ $config['menu'] = array(
 					'accessAction' => array(array('module'=>'pegawai','controller'=>'laporanPegawai','action'=>'view')),
 					'is_child'=> true,
 					'child' =>  array()
-				), 
+				),
+                                array(
+					'title' => 'Rekaman Hutang',
+					'url' => 'pegawai/hutang/view',
+					'is_url' => true,
+					'accessModule' => false,
+					'accessController' => false,
+					'accessAction' => array(array('module'=>'pegawai','controller'=>'rekamanHutang','action'=>'view')),
+					'is_child'=> true,
+					'child' =>  array()
+				),
 			)
         ),
         
         )
     ),
-    
-  array(
+    array(
     'title' => 'Absensi',
     'url' => '',
     'is_url' => false,
@@ -264,18 +220,7 @@ $config['menu'] = array(
 					'is_child'=> true,
 					'child' =>  array()
 				),
-                                array(
-					'title' => 'Permintaan Absen / Izin',
-					'url' => 'absensi/permintaanAbsen/view',
-					'is_url' => true,
-					'accessModule' => false,
-					'accessController' => false,
-					'accessAction' => array(array('module'=>'absensi','controller'=>'permintaanAbsen','action'=>'view')),
-					'is_child'=> true,
-					'child' =>  array()
-				),
-                                
-			)
+                              )
             ),
             array(
         'title' => 'Data Cuti',
@@ -287,7 +232,7 @@ $config['menu'] = array(
         'is_child'=> true,
         'child' =>  array(
 				array(
-					'title' => 'Jenis Cuti',
+					'title' => 'Master Jenis Cuti',
 					'url' => 'absensi/jenisCuti/view',
 					'is_url' => true,
 					'accessModule' => false,
@@ -306,7 +251,7 @@ $config['menu'] = array(
 					'is_child'=> true,
 					'child' =>  array(
 										array(
-											'title' => 'Daftar Cuti',
+											'title' => 'Daftar Pegawai Cuti',
 											'url' => 'absensi/cuti/view',
 											'is_url' => true,
 											'accessModule' => false,
@@ -316,7 +261,7 @@ $config['menu'] = array(
 											'child' =>  array()
 										) ,
 										array(
-											'title' => 'Tambah Cuti',
+											'title' => 'Tambah Pegawai Cuti',
 											'url' => 'absensi/cuti/add',
 											'is_url' => true,
 											'accessModule' => false,
@@ -329,49 +274,6 @@ $config['menu'] = array(
 				) 
 			)
             ),
-            
-            array(
-        'title' => 'Data Lembur',
-        'url' => '',
-        'is_url' => false,
-        'accessModule' => false,
-        'accessController' => false,
-       	'accessAction' => false,
-        'is_child'=> true,
-        'child' =>  array(
-				array(
-					'title' => 'Master Lembur',
-					'url' => 'absensi/masterLembur/view',
-					'is_url' => true,
-					'accessModule' => false,
-					'accessController' => false,
-					'accessAction' => array(array('module'=>'absensi','controller'=>'masterLembur','action'=>'view')),
-					'is_child'=> true,
-					'child' =>  array()
-				),
-                                array(
-					'title' => 'Rekaman Lembur',
-					'url' => 'absensi/rekamanLembur/view',
-					'is_url' => true,
-					'accessModule' => false,
-					'accessController' => false,
-					'accessAction' => array(array('module'=>'absensi','controller'=>'rekamanLembur','action'=>'view')),
-					'is_child'=> true,
-					'child' =>  array()
-				),
-                                array(
-					'title' => 'Permintaan Lembur',
-					'url' => 'absensi/permintaanLembur/view',
-					'is_url' => true,
-					'accessModule' => false,
-					'accessController' => false,
-					'accessAction' => array(array('module'=>'absensi','controller'=>'permintaanLembur','action'=>'view')),
-					'is_child'=> true,
-					'child' =>  array()
-				),
-			)
-            ),
-            
         )
     ),
     
