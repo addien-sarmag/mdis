@@ -1,1 +1,9 @@
-test
+-- install git dulu dengan mengikuti source yang sudah kasih.
+
+-- untuk ubuntu, berikut linknya: https://github.com/facebook/hiphop-php/wiki/Building-and-Installing-on-Ubuntu-11.04
+
+-- untuk fedora, silakan cek link berikut: http://sraji.wordpress.com/2011/01/25/how-to-install-git-on-fedora-14/
+
+-- setelah proses instalasi selesai, maka cek link berikut: http://help.github.com/fork-a-repo/
+
+-- Good luck friends....
