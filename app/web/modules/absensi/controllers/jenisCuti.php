@@ -23,10 +23,10 @@ class jenisCuti extends Controller {
         // delete action
         if (isAccess('absensi','jenisCuti','delete') && $array ['action'] == 'delete' && $array ['id']) {
             if ($this->jeniscuti_model->delete($array['id'])) {
-                $this->_data['errorMessage'] =  'Berhasil Delete jenisCuti' ;
+                $this->_data['errorMessage'] =  'Berhasil Delete Jenis Cuti' ;
                 $this->_data['isSuccess'] =  true ;
             } else {
-                $this->_data['errorMessage'] =  'Gagal Delete jenisCuti' ;
+                $this->_data['errorMessage'] =  'Gagal Delete Jenis Cuti' ;
             }
         }
     }
