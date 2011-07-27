@@ -243,7 +243,7 @@ $config['menu'] = array(
 				),
 				array(
 					'title' => 'Rekaman Cuti',
-					'url' => 'absensi/cuti/view',
+					'url' => 'absensi/rekamanCuti/view',
 					'is_url' => true,
 					'accessModule' => false,
 					'accessController' => false,
