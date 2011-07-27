@@ -5,9 +5,9 @@
 <div class="column full">
 		
 		<div class="box">
-		<div class="box-header">Tambah Jenis Hutang</div>
+		<div class="box-header">Tambah Jenis Cuti</div>
 		<div class="box-content">
-        <?php echo isAccess('absensi','jenisCuti','view') ? anchor('absensi/jenisCuti/view', '<span class="icon_text preview"></span>Daftar Jenis Hutang', 'class="button white fr"') : ''; ?>
+        <?php echo isAccess('absensi','jenisCuti','view') ? anchor('absensi/jenisCuti/view', '<span class="icon_text preview"></span>Daftar Jenis Cuti', 'class="button white"') : ''; ?>
         <br /><br />      
         
 			<div id="loading" style="display:none;"><img src="loading.gif" alt="loading..." /></div>
@@ -22,10 +22,16 @@
             <table> 
                 <tr>
                     <td width="200">Nama</td>
-                    <td>
-                        <?php echo form_input(array('name'=>'name','value'=>get_data($_POST,'name'),'class'=>'form-field'));?>
+                    <td><br />
+                        <?php echo form_input(array('name'=>'nama','value'=>get_data($_POST,'nama'),'class'=>'form-field'));?>
                     </td>
-                </tr>  
+                </tr>
+		<tr>
+                    <td>Jangka Waktu</td>
+                    <td><br />
+                        <?php echo form_input(array('name'=>'jangkawaktu','value'=>get_data($_POST,'jangkawaktu'),'class'=>'form-field'));?>
+                    </td>
+                </tr>
                 <tr>
                     <td>&nbsp;</td>
                     <td>

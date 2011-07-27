@@ -23,6 +23,7 @@
                     <th>Tanggal Cuti</th>
                     <th>Jumlah Cuti</th>
 					<th>Keterangan</th>
+					<th>Action</th>
 				</tr>
             </thead>
             <tbody>
@@ -31,10 +32,10 @@
                 <?php $class = $no % 2 == 0 ? 'even' : 'odd' ?>
                 <tr class=<?php echo $class?>>
                     <td><?php echo $row['nip']?></td>
-                    <td><?php echo $row['tgl_cuti']?></td>
-					<td><?php echo $row['jml_cuti']?></td>
-					<td><?php echo $row['keterangan']?></td>
-					<td>
+                    <td><?php echo $row['tanggal_cuti']?></td>
+		    <td><?php echo $row['jml_cuti']?></td>
+		    <td><?php echo $row['keterangan']?></td>
+		    <td>
                         <?php echo isAccess('absensi','rekamanCuti','edit') ? anchor('absensi/rekamanCuti/edit/id/' . $row['id_cuti'],'<span class="icon_text edit"></span>Edit', 'class="button white"', 'class="button white"') : ''?>
                         
                         <?php echo isAccess('absensi','rekamanCuti','delete') ? anchor('absensi/rekamanCuti/view/page/'.$uri_to_assoc['page'].'/action/delete/id/' . $row['id_cuti'],'<span class="icon_text cancel"></span>Hapus', array('onClick' => "return confirm('".$this->lang->line('global_confirm_delete')."')" , 'class' => "button white")) : ''?>
