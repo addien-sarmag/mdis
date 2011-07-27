@@ -38,7 +38,7 @@ class pegawai_model extends Model {
     public function update($id, $data) {
         if (! $id || ! $this->get ( $id ) || ! $data)
             return array ();
-        $this->db->where ( "nip", $id );
+        $this->db->where ( "nip".$this->_prefix, $id );
         $this->db->limit ( 1 );
         return $this->db->update ( $this->_table, $data ) && ($this->db->affected_rows () > 0) ? true : false;
     }
@@ -51,7 +51,7 @@ class pegawai_model extends Model {
         if (! $id) {
             return array ();
         }
-        $query = $this->db->get_where ( $this->_table, array (  "nip" => $id ) );
+        $query = $this->db->get_where ( $this->_table, array (  "nip".$this->_prefix => $id ) );
         return $query->row_array ();
     }
     /**
@@ -62,18 +62,23 @@ class pegawai_model extends Model {
     public function delete($id) {
         if (! $id || ! $this->get ( $id ))
             return array ();
-        $this->db->where ( "nip" , $id );
+        $this->db->where ( "nip".$this->_prefix , $id );
         $this->db->limit ( 1 );
         return $this->db->delete ( $this->_table ) && ($this->db->affected_rows () > 0) ? true : false;
     }
+    /*
+     * Error if using this line code
+     *
+     * public function getList($limit = 100, $offset = 0,$where ) {
+     */
     public function getList($limit = 100, $offset = 0) {
         $this->db->from ( $this->_table );
-        $this->db->limit ( $limit, $offset );
+        $this->db->limit ( $limit, $offset );               
         $query = $this->db->get ();
         return $query->result_array ();
     }
     public function getCount() {
-        $this->db->select ( 'count(' . "nip" .') as count' );
+        $this->db->select ( 'count(' . "nip" .$this->_prefix.') as count' );
         $this->db->from ( $this->_table );
         $query = $this->db->get ();
         if ($query && ($row = $query->row_array ())) {

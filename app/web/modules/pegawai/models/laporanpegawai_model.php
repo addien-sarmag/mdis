@@ -7,12 +7,12 @@ class laporanpegawai_model extends Model {
      * Table Name
      * @var string
      */
-    protected $_table = 'tbl_pengalaman_kerja';
+    protected $_table = 'tbl_karyawan';
     /**
      * Table Field Prefix
      * @var string
      */
-    protected $_prefix = '_pengalaman';
+    protected $_prefix = '_karyawan';
     public function __construct() {
         // Call the Model constructor
         parent::__construct ();
@@ -38,7 +38,7 @@ class laporanpegawai_model extends Model {
     public function update($id, $data) {
         if (! $id || ! $this->get ( $id ) || ! $data)
             return array ();
-        $this->db->where ( 'id'.$this->_prefix, $id );
+        $this->db->where ( 'nip'.$this->_prefix, $id );
         $this->db->limit ( 1 );
         return $this->db->update ( $this->_table, $data ) && ($this->db->affected_rows () > 0) ? true : false;
     }
@@ -62,7 +62,7 @@ class laporanpegawai_model extends Model {
     public function delete($id) {
         if (! $id || ! $this->get ( $id ))
             return array ();
-        $this->db->where ( 'id'.$this->_prefix , $id );
+        $this->db->where ( 'nip'.$this->_prefix , $id );
         $this->db->limit ( 1 );
         return $this->db->delete ( $this->_table ) && ($this->db->affected_rows () > 0) ? true : false;
     }
@@ -70,12 +70,40 @@ class laporanpegawai_model extends Model {
         $this->db->from ( $this->_table );
         $this->db->limit ( $limit, $offset );
           
+        if ( isset($where['status']) && $where['status'] != 'all'  ) 
+        	$this->db->where ( "status_karyawan" , $where['status']  );
+        	
+       	if ( isset($where['dateFrom'] ) &&  isset($where['dateTo'] )   )
+        	$this->db->where ( "`tanggalMasuk_karyawan` BETWEEN  '".$where['dateFrom']."' AND '".$where['dateTo']."' ");
+        
         $query = $this->db->get (); 
         return $query->result_array ();
     }
-    public function getCount() {
-        $this->db->select ( 'count(' . 'id'.$this->_prefix.') as count' );
+     
+	public function getListPegawai($limit = 100, $offset = 0 , $where = array() ) {
         $this->db->from ( $this->_table );
+        $this->db->limit ( $limit, $offset );
+          
+        if ( isset($where['status']) && $where['status'] != 'all'  ) 
+        	$this->db->where ( "status_karyawan" , $where['status']  );
+        
+        if ( isset($where['dateFrom'] ) &&  isset($where['dateTo'] )   )
+        	$this->db->where ( "`tanggalMasuk_karyawan` BETWEEN  '".$where['dateFrom']."' AND '".$where['dateTo']."' ");
+        
+        $query = $this->db->get (); 
+        return $query->result_array ();
+    }
+    
+    public function getCount( $where ) {
+        $this->db->select ( 'count(' . 'nip'.$this->_prefix.') as count' );
+        $this->db->from ( $this->_table );
+        
+        if ( isset($where['status']) && $where['status'] != 'all' ) 
+        	$this->db->where ( "status_karyawan" , $where['status']  );
+        	
+        if ( isset($where['dateFrom'] ) &&  isset($where['dateTo'] )   )
+        	$this->db->where ( "`tanggalMasuk_karyawan` BETWEEN  '".$where['dateFrom']."' AND '".$where['dateTo']."' ");   	
+        
         $query = $this->db->get ();
         if ($query && ($row = $query->row_array ())) {
             return $row ['count'];

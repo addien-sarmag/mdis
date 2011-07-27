@@ -2,7 +2,7 @@
 if (! defined ( 'BASEPATH' ))
     exit ( 'No direct script access allowed' );
 
-class jeniscuti_model extends Model {
+class Jeniscuti_model extends Model {
     /**
      * Table Name
      * @var string

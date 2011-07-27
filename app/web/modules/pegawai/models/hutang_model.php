@@ -7,12 +7,12 @@ class hutang_model extends Model {
      * Table Name
      * @var string
      */
-    protected $_table = 'tbl_pengalaman_kerja';
+    protected $_table = 'tbl_hutang';
     /**
      * Table Field Prefix
      * @var string
      */
-    protected $_prefix = '_pengalaman';
+    protected $_prefix = '_hutang';
     public function __construct() {
         // Call the Model constructor
         parent::__construct ();
@@ -50,7 +50,7 @@ class hutang_model extends Model {
     public function get($id) {
         if (! $id) {
             return array ();
-        }
+        } 
         $query = $this->db->get_where ( $this->_table, array (  'id'.$this->_prefix => $id ) );
         return $query->row_array ();
     }
@@ -67,15 +67,36 @@ class hutang_model extends Model {
         return $this->db->delete ( $this->_table ) && ($this->db->affected_rows () > 0) ? true : false;
     }
     public function getList($limit = 100, $offset = 0 , $where = array() ) {
+    	
+    	if ( ! isset($where['nip'])) return array();
+    	
         $this->db->from ( $this->_table );
         $this->db->limit ( $limit, $offset );
-          
-        $query = $this->db->get (); 
+        $this->db->where ( 'nip_karyawan' , $where['nip'] );
+        
+        $this->db->where ( "pid_hutang" , 0 );
+        $query = $this->db->get (); 	
         return $query->result_array ();
     }
-    public function getCount() {
+    
+ 	public function getListPay($limit = 100, $offset = 0 , $where = array() ) {
+    	
+    	if ( ! isset($where['nip'])) return array();
+    	
+        $this->db->from ( $this->_table );
+        $this->db->limit ( $limit, $offset );
+        $this->db->where ( 'pid_hutang' , $where['pid'] );
+        $query = $this->db->get (); 	
+        return $query->result_array ();
+    }
+    
+    public function getCount($where) {
+    	
+    	if ( ! isset($where['nip'])) return 0;
+    	
         $this->db->select ( 'count(' . 'id'.$this->_prefix.') as count' );
         $this->db->from ( $this->_table );
+        $this->db->where ( 'nip_karyawan' , $where['nip'] );
         $query = $this->db->get ();
         if ($query && ($row = $query->row_array ())) {
             return $row ['count'];

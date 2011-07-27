@@ -50,7 +50,7 @@ class pengalamankerja_model extends Model {
     public function get($id) {
         if (! $id) {
             return array ();
-        }
+        } 
         $query = $this->db->get_where ( $this->_table, array (  'id'.$this->_prefix => $id ) );
         return $query->row_array ();
     }
@@ -67,15 +67,22 @@ class pengalamankerja_model extends Model {
         return $this->db->delete ( $this->_table ) && ($this->db->affected_rows () > 0) ? true : false;
     }
     public function getList($limit = 100, $offset = 0 , $where = array() ) {
+    	
+    	if ( ! isset($where['nip'])) return array();
+    	
         $this->db->from ( $this->_table );
         $this->db->limit ( $limit, $offset );
-          
-        $query = $this->db->get (); 
+        $this->db->where ( 'nip_karyawan' , $where['nip'] );
+        $query = $this->db->get (); 	
         return $query->result_array ();
     }
-    public function getCount() {
+    public function getCount($where) {
+    	
+    	if ( ! isset($where['nip'])) return 0;
+    	
         $this->db->select ( 'count(' . 'id'.$this->_prefix.') as count' );
         $this->db->from ( $this->_table );
+        $this->db->where ( 'nip_karyawan' , $where['nip'] );
         $query = $this->db->get ();
         if ($query && ($row = $query->row_array ())) {
             return $row ['count'];

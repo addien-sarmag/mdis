@@ -1,9 +1,9 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $db['default']['hostname'] = "localhost";
-$db['default']['username'] = "s4rm4g_mdisuser";
-$db['default']['password'] = 'mdiswow';
-$db['default']['database'] = "s4rm4g_mdisdemo";
+$db['default']['username'] = "root";
+$db['default']['password'] = 'bichie';
+$db['default']['database'] = "mdisv3";
 $db['default']['dbdriver'] = "mysql";
 $db['default']['dbprefix'] = "";
 $db['default']['pconnect'] = TRUE;

@@ -33,12 +33,18 @@ class pengalamanKerja extends Controller {
     public function view() {
     	if (! isAccess ( 'pegawai', 'pengalamanKerja', 'view'))
             redirect (); 
-        $array = $this->uri->uri_to_assoc ( 3, array ('id', 'action', 'page' ) );
+        $array = $this->uri->uri_to_assoc ( 3, array ('id', 'action', 'page' ,'nip' ) );
         $this->_executeView ();
+        
+        if( isset($_POST['nip']) && ! empty ($_POST['nip'])) $array['nip'] = $_POST['nip'];
+        
         $array['page'] = (int) $array['page'];
+        
+        $where = array();
+        $where = array( 'nip' => $array['nip'] );
 
         $this->load->library('pagination');
-        $total = $this->pengalamankerja_model->getCount();
+        $total = $this->pengalamankerja_model->getCount(  $where );
         if (($array['page'] + 1) > $total)
             $array['page'] = 0;
         $limit = $this->config->item('pegawai_limit');
@@ -51,7 +57,10 @@ class pengalamanKerja extends Controller {
         $this->pagination->initialize($config);
         $this->_data['paging'] =  $this->pagination->create_links();
         
-        $dataView = $this->pengalamankerja_model->getList($limit,$array['page']);
+        $dataView = $this->pengalamankerja_model->getList($limit,$array['page'], $where );
+        
+        
+        
         $this->_data['dataView'] = $dataView;
         $this->_data['uri_to_assoc'] = $array;
 
@@ -61,27 +70,43 @@ class pengalamanKerja extends Controller {
         $array = $this->uri->uri_to_assoc ( 3, array ('kode', 'action' ) );
         
         if ($this->input->post ( 'kirim' ) == 'kirim') {
-        	
+         
+        	 
         	if ( $_POST ) foreach ( $_POST as $key => $val ) $$key = $val ;
         	
             $data = array ();
-            $data ['nama_pengalamanKerja'] = $name; 
-            if ( isset($tipepengalamanKerja)) $data ['tipe_pengalamanKerja'] = $tipepengalamanKerja; 
+            $data ['nip_karyawan'] = $nip; 
+            $data ['namaPerusahaan_pengalaman'] = $company; 
+            $data ['jabatan_pengalaman'] = $jabatan; 
+            $data ['tanggalMasuk_pengalaman'] = $tanggalMasuk;  
+            $data ['tanggalKeluar_pengalaman'] = $tanggalKeluar; 
+            $data ['gaji_pengalaman'] = $gaji; 
+            $data ['alasanResend_pengalaman'] = $alasan;   
             
             $errors = array ();
-        	if (empty ( $name ))  
-                $errors [] = 'Input Name';
-            if ( ! isset($tipepengalamanKerja) || empty ( $name ))  
-                $errors [] = 'Input Tipe pengalamanKerja';
+        		if (empty ( $nip ))  
+                $errors [] = 'Input Nip';
+              	if (empty ( $company ))  
+                $errors [] = 'Input Nama Perusahaan';
+                if (empty ( $jabatan ))  
+                $errors [] = 'Input Jabatan';
+                if (empty ( $tanggalMasuk ))  
+                $errors [] = 'Input Tanggal Masuk';
+                if (empty ( $tanggalKeluar ))  
+                $errors [] = 'Input Tanggal Keluar';
+                if (empty ( $gaji ))  
+                $errors [] = 'Input Gaji Terakhir';
+                if (empty ( $alasan ))  
+                $errors [] = 'Input Alasan Resend'; 
         	  
             if ($errors) { 
                 $this->_data['errorMessage'] =  implode ( '<br />', $errors ) ;
             } elseif ($this->pengalamankerja_model->add ( $data )) {
-                $this->_data['errorMessage'] =  'Berhasil Tambah pengalamanKerja  ' ;
+                $this->_data['errorMessage'] =  'Berhasil Tambah Pengalaman Kerja  ' ;
                 $_POST = array();
                 $this->_data['isSuccess'] =  true ;
             } else {
-                $this->_data['errorMessage'] =  'Gagal Tambah pengalamanKerja  ' ;
+                $this->_data['errorMessage'] =  'Gagal Tambah Pengalaman Kerja  ' ;
             }
         
         }
@@ -90,9 +115,11 @@ class pengalamanKerja extends Controller {
     public function add() {
     	if (! isAccess ( 'pegawai', 'pengalamanKerja', 'add'))
             redirect (); 
-        $array = $this->uri->uri_to_assoc ( 3, array ('action' ) );
+        $array = $this->uri->uri_to_assoc ( 3, array ('action','nip' ) );
         $this->_executeAdd ();
+           
           
+        $this->_data['uri_to_assoc'] = $array;
         
         $this->_view ( 'pegawai/pengalamanKerjaAdd' );
     }
@@ -107,25 +134,41 @@ class pengalamanKerja extends Controller {
         	if ( ! $id ) show_error( $this->lang->line('gagal_update'));
         	
             $data = array ();
-            $data ['nama_pengalamanKerja'] = $name; 
-            if ( isset($tipepengalamanKerja)) $data ['tipe_pengalamanKerja'] = $tipepengalamanKerja; 
+            $data ['nip_karyawan'] = $nip; 
+            $data ['namaPerusahaan_pengalaman'] = $company; 
+            $data ['jabatan_pengalaman'] = $jabatan; 
+            $data ['tanggalMasuk_pengalaman'] = $tanggalMasuk;  
+            $data ['tanggalKeluar_pengalaman'] = $tanggalKeluar; 
+            $data ['gaji_pengalaman'] = $gaji; 
+            $data ['alasanResend_pengalaman'] = $alasan;   
             
-            $errors = array ();
-        	if (empty ( $name ))  
-                $errors [] = 'Input Name';
-            if ( ! isset($tipepengalamanKerja) || empty ( $name ))  
-                $errors [] = 'Input Tipe pengalamanKerja'; 
-             
+            	$errors = array ();
+        		if (empty ( $nip ))  
+                $errors [] = 'Input Nip';
+              	if (empty ( $company ))  
+                $errors [] = 'Input Nama Perusahaan';
+                if (empty ( $jabatan ))  
+                $errors [] = 'Input Jabatan';
+                if (empty ( $tanggalMasuk ))  
+                $errors [] = 'Input Tanggal Masuk';
+                if (empty ( $tanggalKeluar ))  
+                $errors [] = 'Input Tanggal Keluar';
+                if (empty ( $gaji ))  
+                $errors [] = 'Input Gaji Terakhir';
+                if (empty ( $alasan ))  
+                $errors [] = 'Input Alasan Resend'; 
+                
+                
             if ($errors) {
                 $this->_data['errorMessage'] =  implode ( '<br />', $errors ) ;
             } elseif ($this->pengalamankerja_model->update ( $array['id'], $data )) {
-                $this->_data['errorMessage'] =  'Berhasil Edit pengalamanKerja  ' ;
+                $this->_data['errorMessage'] =  'Berhasil Edit Pengalaman Kerja  ' ;
                 unset($_POST);
                 $pengalamanKerja = $this->pengalamankerja_model->get ( $array['id'] );
                 $this->_data['isSuccess'] =  true ;
                 $this->_data['dataEdit'] = $pengalamanKerja;    
             } else {
-                $this->_data['errorMessage'] =  'Gagal Edit pengalamanKerja  ' ;
+                $this->_data['errorMessage'] =  'Gagal Edit Pengalaman Kerja  ' ;
             }
         }    
     }
@@ -133,16 +176,17 @@ class pengalamanKerja extends Controller {
     public function edit() {
     	if (! isAccess ( 'pegawai', 'pengalamanKerja', 'edit'))
             redirect (); 
-        $array = $this->uri->uri_to_assoc ( 3, array ('id' ) );
+        $array = $this->uri->uri_to_assoc ( 3, array ( 'id','nip') );
         if (! $array ['id'])
             show_404 ();
-        $pengalamanKerja = $this->pengalamankerja_model->get ( $array ['id'] );
+              
+        $pengalamanKerja = $this->pengalamankerja_model->get ( $array['id'] );
         $this->_data['dataEdit'] = $pengalamanKerja; 
- 
-    	  
-        
+  		
+        $this->_data['uri_to_assoc'] = $array;
         if (! $pengalamanKerja)
             show_404 ();
+            
         $this->_executeEdit();
         $this->_view ( 'pegawai/pengalamanKerjaEdit' );
     }

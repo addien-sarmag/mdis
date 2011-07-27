@@ -277,48 +277,48 @@ $config['menu'] = array(
         )
     ),
     
-    array(
-    'title' => 'Penilaian Pegawai',
-    'url' => '',
-    'is_url' => false,
-  	'module' => 'penilaian',
-    'accessModule' => false,
-    'accessController' => false,
-    'accessAction' => false,
-    'is_child'=> true,
-    'child' =>  array(
-  	array(
-        'title' => 'Penilaian Individu',
-        'url' => 'penilaian/penilaianIndividu/view',
-        'is_url' => true,
-        'accessModule' => false,
-        'accessController' => false,
-  		'accessAction' => array(array('module'=>'penilaian','controller'=>'penilaianIndividu','action'=>'view')),
-        'is_child'=> true,
-        'child' =>  array()
-        ),
-        array(
-        'title' => 'Penilaian Kelompok',
-        'url' => 'penilaian/penilaianKelompok/view',
-        'is_url' => true,
-        'accessModule' => false,
-        'accessController' => false,
-  		'accessAction' => array(array('module'=>'penilaian','controller'=>'penilaianKelompok','action'=>'view')),
-        'is_child'=> true,
-        'child' =>  array()
-        ),
-        array(
-        'title' => 'Rekapitulasi Penilaian',
-        'url' => 'penilaian/rekapPenilaian/view',
-        'is_url' => true,
-        'accessModule' => false,
-        'accessController' => false,
-  		'accessAction' => array(array('module'=>'penilaian','controller'=>'rekapPenilaian','action'=>'view')),
-        'is_child'=> true,
-        'child' =>  array()
-        ),
-    )
-),
+//    array(
+//    'title' => 'Penilaian Pegawai',
+//    'url' => '',
+//    'is_url' => false,
+//  	'module' => 'penilaian',
+//    'accessModule' => false,
+//    'accessController' => false,
+//    'accessAction' => false,
+//    'is_child'=> true,
+//    'child' =>  array(
+//  	array(
+//        'title' => 'Penilaian Individu',
+//        'url' => 'penilaian/penilaianIndividu/view',
+//        'is_url' => true,
+//        'accessModule' => false,
+//        'accessController' => false,
+//  		'accessAction' => array(array('module'=>'penilaian','controller'=>'penilaianIndividu','action'=>'view')),
+//        'is_child'=> true,
+//        'child' =>  array()
+//        ),
+//        array(
+//        'title' => 'Penilaian Kelompok',
+//        'url' => 'penilaian/penilaianKelompok/view',
+//        'is_url' => true,
+//        'accessModule' => false,
+//        'accessController' => false,
+//  		'accessAction' => array(array('module'=>'penilaian','controller'=>'penilaianKelompok','action'=>'view')),
+//        'is_child'=> true,
+//        'child' =>  array()
+//        ),
+//        array(
+//        'title' => 'Rekapitulasi Penilaian',
+//        'url' => 'penilaian/rekapPenilaian/view',
+//        'is_url' => true,
+//        'accessModule' => false,
+//        'accessController' => false,
+//  		'accessAction' => array(array('module'=>'penilaian','controller'=>'rekapPenilaian','action'=>'view')),
+//        'is_child'=> true,
+//        'child' =>  array()
+//        ),
+//    )
+//),
     array(
     'title' => 'Payroll',
     'url' => '',

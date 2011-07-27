@@ -2,17 +2,17 @@
 if (! defined ( 'BASEPATH' ))
     exit ( 'No direct script access allowed' );
 
-class pengalamankerja_model extends Model {
+class jabatan_model extends Model {
     /**
      * Table Name
      * @var string
      */
-    protected $_table = 'tbl_pengalaman_kerja';
+    protected $_table = 'tbl_jabatan';
     /**
      * Table Field Prefix
      * @var string
      */
-    protected $_prefix = '_pengalaman';
+    protected $_prefix = '_jabatan';
     public function __construct() {
         // Call the Model constructor
         parent::__construct ();
@@ -67,9 +67,10 @@ class pengalamankerja_model extends Model {
         return $this->db->delete ( $this->_table ) && ($this->db->affected_rows () > 0) ? true : false;
     }
     public function getList($limit = 100, $offset = 0 , $where = array() ) {
+    	
         $this->db->from ( $this->_table );
         $this->db->limit ( $limit, $offset );
-          
+        $this->db->where ( 'tipe_jabatan' , $where['tipe_jabatan'] );
         $query = $this->db->get (); 
         return $query->result_array ();
     }

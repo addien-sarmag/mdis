@@ -6,7 +6,7 @@ class kontrakPegawai extends Controller {
     public function __construct() {
         parent::__construct ();
         $this->_data = array ();
-        $this->load->model ( 'kontrakpegawai_model' );
+        $this->load->model ( 'kontrakPegawai_model' );
         isController('pegawai','kontrakPegawai');
     }
     protected function _view($template, $data = array(), $result = false) {
@@ -22,7 +22,7 @@ class kontrakPegawai extends Controller {
         $array = $this->uri->uri_to_assoc ( 3, array ('id', 'action' ) );
         // delete action
         if (isAccess('pegawai','kontrakPegawai','delete') && $array ['action'] == 'delete' && $array ['id']) {
-            if ($this->kontrakpegawai_model->delete($array['id'])) {
+            if ($this->kontrakPegawai_model->delete($array['id'])) {
                 $this->_data['errorMessage'] =  'Berhasil Delete kontrakPegawai' ;
                 $this->_data['isSuccess'] =  true ;
             } else {
@@ -33,12 +33,18 @@ class kontrakPegawai extends Controller {
     public function view() {
     	if (! isAccess ( 'pegawai', 'kontrakPegawai', 'view'))
             redirect (); 
-        $array = $this->uri->uri_to_assoc ( 3, array ('id', 'action', 'page' ) );
+        $array = $this->uri->uri_to_assoc ( 3, array ('id', 'action', 'page' ,'nip' ) );
         $this->_executeView ();
+        
+        if( isset($_POST['nip']) && ! empty ($_POST['nip'])) $array['nip'] = $_POST['nip'];
+        
         $array['page'] = (int) $array['page'];
+        
+        $where = array();
+        $where = array( 'nip' => $array['nip'] );
 
         $this->load->library('pagination');
-        $total = $this->kontrakpegawai_model->getCount();
+        $total = $this->kontrakPegawai_model->getCount(  $where );
         if (($array['page'] + 1) > $total)
             $array['page'] = 0;
         $limit = $this->config->item('pegawai_limit');
@@ -51,7 +57,9 @@ class kontrakPegawai extends Controller {
         $this->pagination->initialize($config);
         $this->_data['paging'] =  $this->pagination->create_links();
         
-        $dataView = $this->kontrakpegawai_model->getList($limit,$array['page']);
+        $dataView = $this->kontrakPegawai_model->getList($limit,$array['page'], $where );
+         
+        
         $this->_data['dataView'] = $dataView;
         $this->_data['uri_to_assoc'] = $array;
 
@@ -61,27 +69,40 @@ class kontrakPegawai extends Controller {
         $array = $this->uri->uri_to_assoc ( 3, array ('kode', 'action' ) );
         
         if ($this->input->post ( 'kirim' ) == 'kirim') {
-        	
+         	 
         	if ( $_POST ) foreach ( $_POST as $key => $val ) $$key = $val ;
+        	   
         	
             $data = array ();
-            $data ['nama_kontrakPegawai'] = $name; 
-            if ( isset($tipekontrakPegawai)) $data ['tipe_kontrakPegawai'] = $tipekontrakPegawai; 
+            $data ['nip_karyawan'] = $nip; 
+            $data ['nomor_kontrakPegawai'] = $nomor; 
+            $data ['desc_kontrakPegawai'] = $desc; 
+            $data ['tanggalAwal_kontrakPegawai'] = $tanggalAwal;  
+            $data ['tanggalAkhir_kontrakPegawai'] = $tanggalAkhir;    
             
-            $errors = array ();
-        	if (empty ( $name ))  
-                $errors [] = 'Input Name';
-            if ( ! isset($tipekontrakPegawai) || empty ( $name ))  
-                $errors [] = 'Input Tipe kontrakPegawai';
+            	$errors = array ();
+        		if (empty ( $nip ))  
+                $errors [] = 'Input Nip';
+                if (empty ( $nomor )) {
+                $errors [] = 'Input Nomor kontrakPegawai';
+                }elseif ( checkKode( "tbl_kontrakPegawai" , array('nomor_kontrakPegawai'=>$nomor) ) ){
+                 $errors [] = 'Input Nomor Kontrak  Sudah Terpakai';
+                } 
+                if (empty ( $desc ))  
+                $errors [] = 'Input Keterangan';
+                if (empty ( $tanggalAwal ))  
+                $errors [] = 'Input Tanggal Mulai';
+                if (empty ( $tanggalAkhir ))  
+                $errors [] = 'Input Tanggal Selesai'; 
         	  
             if ($errors) { 
                 $this->_data['errorMessage'] =  implode ( '<br />', $errors ) ;
-            } elseif ($this->kontrakpegawai_model->add ( $data )) {
-                $this->_data['errorMessage'] =  'Berhasil Tambah kontrakPegawai  ' ;
+            } elseif ($this->kontrakPegawai_model->add ( $data )) {
+                $this->_data['errorMessage'] =  'Berhasil Tambah Kontrak  ' ;
                 $_POST = array();
                 $this->_data['isSuccess'] =  true ;
             } else {
-                $this->_data['errorMessage'] =  'Gagal Tambah kontrakPegawai  ' ;
+                $this->_data['errorMessage'] =  'Gagal Tambah Kontrak  ' ;
             }
         
         }
@@ -90,9 +111,11 @@ class kontrakPegawai extends Controller {
     public function add() {
     	if (! isAccess ( 'pegawai', 'kontrakPegawai', 'add'))
             redirect (); 
-        $array = $this->uri->uri_to_assoc ( 3, array ('action' ) );
+        $array = $this->uri->uri_to_assoc ( 3, array ('action','nip' ) );
         $this->_executeAdd ();
+           
           
+        $this->_data['uri_to_assoc'] = $array;
         
         $this->_view ( 'pegawai/kontrakPegawaiAdd' );
     }
@@ -107,25 +130,38 @@ class kontrakPegawai extends Controller {
         	if ( ! $id ) show_error( $this->lang->line('gagal_update'));
         	
             $data = array ();
-            $data ['nama_kontrakPegawai'] = $name; 
-            if ( isset($tipekontrakPegawai)) $data ['tipe_kontrakPegawai'] = $tipekontrakPegawai; 
+            $data ['nip_karyawan'] = $nip; 
+            $data ['nomor_kontrakPegawai'] = $nomor; 
+            $data ['desc_kontrakPegawai'] = $desc; 
+            $data ['tanggalAwal_kontrakPegawai'] = $tanggalAwal;  
+            $data ['tanggalAkhir_kontrakPegawai'] = $tanggalAkhir;    
             
-            $errors = array ();
-        	if (empty ( $name ))  
-                $errors [] = 'Input Name';
-            if ( ! isset($tipekontrakPegawai) || empty ( $name ))  
-                $errors [] = 'Input Tipe kontrakPegawai'; 
+            	$errors = array ();
+        		if (empty ( $nip ))  
+                $errors [] = 'Input Nip';
+                if (empty ( $nomor )) {
+                $errors [] = 'Input Nomor Kontrak';
+                }elseif ( $nomorOld != $nomor && checkKode( "tbl_kontrakPegawai" , array('nomor_kontrakPegawai'=>$nomor) ) ){
+                 $errors [] = 'Input Nomor Kontrak  Sudah Terpakai';
+                } 
+                if (empty ( $desc ))  
+                $errors [] = 'Input Keterangan';
+                if (empty ( $tanggalAwal ))  
+                $errors [] = 'Input Tanggal Mulai';
+                if (empty ( $tanggalAkhir ))  
+                $errors [] = 'Input Tanggal Selesai'; 
              
+                 
             if ($errors) {
                 $this->_data['errorMessage'] =  implode ( '<br />', $errors ) ;
-            } elseif ($this->kontrakpegawai_model->update ( $array['id'], $data )) {
-                $this->_data['errorMessage'] =  'Berhasil Edit kontrakPegawai  ' ;
+            } elseif ($this->kontrakPegawai_model->update ( $array['id'], $data )) {
+                $this->_data['errorMessage'] =  'Berhasil Edit Kontrak  ' ;
                 unset($_POST);
-                $kontrakPegawai = $this->kontrakpegawai_model->get ( $array['id'] );
+                $kontrakPegawai = $this->kontrakPegawai_model->get ( $array['id'] );
                 $this->_data['isSuccess'] =  true ;
                 $this->_data['dataEdit'] = $kontrakPegawai;    
             } else {
-                $this->_data['errorMessage'] =  'Gagal Edit kontrakPegawai  ' ;
+                $this->_data['errorMessage'] =  'Gagal Edit Kontrak  ' ;
             }
         }    
     }
@@ -133,16 +169,17 @@ class kontrakPegawai extends Controller {
     public function edit() {
     	if (! isAccess ( 'pegawai', 'kontrakPegawai', 'edit'))
             redirect (); 
-        $array = $this->uri->uri_to_assoc ( 3, array ('id' ) );
+        $array = $this->uri->uri_to_assoc ( 3, array ( 'id','nip') );
         if (! $array ['id'])
             show_404 ();
-        $kontrakPegawai = $this->kontrakpegawai_model->get ( $array ['id'] );
+              
+        $kontrakPegawai = $this->kontrakPegawai_model->get ( $array['id'] );
         $this->_data['dataEdit'] = $kontrakPegawai; 
- 
-    	  
-        
+  		
+        $this->_data['uri_to_assoc'] = $array;
         if (! $kontrakPegawai)
             show_404 ();
+            
         $this->_executeEdit();
         $this->_view ( 'pegawai/kontrakPegawaiEdit' );
     }
