@@ -11,7 +11,7 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://localhost/mdis2/";
+$config['base_url']	= "http://".$_SERVER['SERVER_NAME']."/";
 //$config['base_url']	= "http://172.17.3.73/ditajaya/";
 
 /*
