@@ -249,6 +249,19 @@ $config['menu'] = array(
 					'accessController' => false,
 					'accessAction' => array(array('module'=>'absensi','controller'=>'rekamanCuti','action'=>'view')),
 					'is_child'=> true,
+					'child' =>  array()
+				),
+				/*
+				 *** Old config for Rekaman Cuti menu
+				 *
+				array(
+					'title' => 'Rekaman Cuti',
+					'url' => 'absensi/cuti/view',
+					'is_url' => true,
+					'accessModule' => false,
+					'accessController' => false,
+					'accessAction' => array(array('module'=>'absensi','controller'=>'rekamanCuti','action'=>'view')),
+					'is_child'=> true,
 					'child' =>  array(
 										array(
 											'title' => 'Daftar Pegawai Cuti',
@@ -271,8 +284,9 @@ $config['menu'] = array(
 											'child' =>  array()
 										) ,
 					)
-				) 
-			)
+					)
+				 */
+				)
             ),
         )
     ),
