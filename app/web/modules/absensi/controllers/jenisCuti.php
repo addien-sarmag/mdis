@@ -62,26 +62,28 @@ class jenisCuti extends Controller {
         
         if ($this->input->post ( 'kirim' ) == 'kirim') {
         	
-        	if ( $_POST ) foreach ( $_POST as $key => $val ) $$key = $val ;
-        	
+	    $namajnscuti = trim($this->input->post('nama'));
+	    $jangka_waktu = trim($this->input->post('jangkawaktu'));
+	    	
             $data = array ();
-            $data ['nama_jenisCuti'] = $name; 
-            if ( isset($tipejenisCuti)) $data ['tipe_jenisCuti'] = $tipejenisCuti; 
-            
+            $data ['nama_cuti'] = $namajnscuti;
+	    $data ['jangka_waktu'] = $jangka_waktu;
+	    
             $errors = array ();
-        	if (empty ( $name ))  
-                $errors [] = 'Input Name';
-            if ( ! isset($tipejenisCuti) || empty ( $name ))  
-                $errors [] = 'Input Tipe jenisCuti';
-        	  
+            if (empty ( $namajnscuti ))  
+                $errors [] = 'Input Nama Jenis Cuti';
+		
+            if (empty ( $jangka_waktu ))  
+                $errors [] = 'Input Jangka Waktu';
+           
             if ($errors) { 
                 $this->_data['errorMessage'] =  implode ( '<br />', $errors ) ;
             } elseif ($this->jeniscuti_model->add ( $data )) {
-                $this->_data['errorMessage'] =  'Berhasil Tambah jenisCuti  ' ;
+                $this->_data['errorMessage'] =  'Berhasil Tambah Jenis Cuti  ' ;
                 $_POST = array();
                 $this->_data['isSuccess'] =  true ;
             } else {
-                $this->_data['errorMessage'] =  'Gagal Tambah jenisCuti  ' ;
+                $this->_data['errorMessage'] =  'Gagal Tambah Jenis Cuti' ;
             }
         
         }
@@ -101,31 +103,30 @@ class jenisCuti extends Controller {
         $array = $this->uri->uri_to_assoc ( 3, array ('id', 'action' ) );
         if ($this->input->post ( 'kirim' ) == 'kirim') {
             
-        	if ( $_POST ) foreach ( $_POST as $key => $val ) $$key = $val ;
-        	if ( $array ) foreach ( $array as $key => $val ) if (  empty($$key) ) $$key = $val ;
-            
-        	if ( ! $id ) show_error( $this->lang->line('gagal_update'));
-        	
+	    $namajnscuti = trim($this->input->post('nama'));
+	    $jangka_waktu = trim($this->input->post('jangkawaktu'));
+	    	
             $data = array ();
-            $data ['nama_jenisCuti'] = $name; 
-            if ( isset($tipejenisCuti)) $data ['tipe_jenisCuti'] = $tipejenisCuti; 
-            
+            $data ['nama_cuti'] = $namajnscuti;
+	    $data ['jangka_waktu'] = $jangka_waktu;
+	    
             $errors = array ();
-        	if (empty ( $name ))  
-                $errors [] = 'Input Name';
-            if ( ! isset($tipejenisCuti) || empty ( $name ))  
-                $errors [] = 'Input Tipe jenisCuti'; 
-             
-            if ($errors) {
+            if (empty ( $namajnscuti ))  
+                $errors [] = 'Input Nama Jenis Cuti';
+		
+            if (empty ( $jangka_waktu ))  
+                $errors [] = 'Input Jangka Waktu';
+	    
+	    if ($errors) {
                 $this->_data['errorMessage'] =  implode ( '<br />', $errors ) ;
             } elseif ($this->jeniscuti_model->update ( $array['id'], $data )) {
-                $this->_data['errorMessage'] =  'Berhasil Edit jenisCuti  ' ;
+                $this->_data['errorMessage'] =  'Berhasil Edit Jenis Cuti' ;
                 unset($_POST);
                 $jenisCuti = $this->jeniscuti_model->get ( $array['id'] );
                 $this->_data['isSuccess'] =  true ;
                 $this->_data['dataEdit'] = $jenisCuti;    
             } else {
-                $this->_data['errorMessage'] =  'Gagal Edit jenisCuti  ' ;
+                $this->_data['errorMessage'] =  'Gagal Edit Jenis Cuti' ;
             }
         }    
     }

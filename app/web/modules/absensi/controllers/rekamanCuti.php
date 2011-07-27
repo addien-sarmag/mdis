@@ -22,7 +22,7 @@ class RekamanCuti extends Controller {
         $array = $this->uri->uri_to_assoc ( 3, array ('id', 'action' ) );
         // delete action
         if (isAccess('absensi','rekamanCuti','delete') && $array ['action'] == 'delete' && $array ['id']) {
-            if ($this->rekamanCuti_model->delete($array['id'])) {
+            if ($this->rekamancuti_model->delete($array['id'])) {
                 $this->_data['errorMessage'] =  'Berhasil delete data absensi' ;
                 $this->_data['isSuccess'] =  true ;
             } else {
@@ -38,7 +38,7 @@ class RekamanCuti extends Controller {
         $array['page'] = (int) $array['page'];
 
         $this->load->library('pagination');
-        $total = $this->agama_model->getCount();
+        $total = $this->rekamancuti_model->getCount();
         if (($array['page'] + 1) > $total)
             $array['page'] = 0;
         $limit = $this->config->item('master_limit');
@@ -51,7 +51,7 @@ class RekamanCuti extends Controller {
         $this->pagination->initialize($config);
         $this->_data['paging'] =  $this->pagination->create_links();
         
-        $dataView = $this->rekamanCuti_model->getList($limit,$array['page']);
+        $dataView = $this->rekamancuti_model->getList($limit,$array['page']);
         $this->_data['dataView'] = $dataView;
         $this->_data['uri_to_assoc'] = $array;
 			 
@@ -66,29 +66,32 @@ class RekamanCuti extends Controller {
         if ($this->input->post ( 'kirim' ) == 'kirim') {
             $nip = trim ( $this->input->post ( 'nip' ) );
             $tgl_cuti = trim ( $this->input->post ( 'tgl_cuti' ) );
-			$jml_cuti = trim ( $this->input->post ( 'jml_cuti' ) );
-			$keterangan = trim ( $this->input->post ( 'ketreangan' ) );
-            $data = array ();
+	    $jml_cuti = trim ( $this->input->post ( 'jml_cuti' ) );
+	    $keterangan = trim ( $this->input->post ( 'keterangan' ) );
+        
+	    $data = array ();
             $data ['nip'] = $nip;
-            $data ['tgl_cuti'] = $tgl_cuti;
-			$data ['jml_cuti'] = $jml_cuti;
-			$data ['keterangan'] = $keterangan;
-            $errors = array ();
-        	if (empty ( $nip )) {
+            $data ['tanggal_cuti'] = $tgl_cuti;
+	    $data ['jml_cuti'] = $jml_cuti;
+	    $data ['keterangan'] = $keterangan;
+            
+	    $errors = array ();
+            if (empty ( $nip )) {
                 $errors [] = 'Input NIP';
-        	} else  {
+            } /*else  {
             	$this->load->model ('cek_model');
             	$cekKode = $this->cek_model->cekNip ('absensi' , $nip);
             	if($cekKode > 0)
             		$errors [] = 'NIP Sudah Terdaftar. Silahkan Diganti';
-            }
+            }*/
             
             if (empty ( $tgl_cuti ))
                 $errors [] = 'Input Tanggal Cuti';
+		
             if ($errors) {
             	// '<b>Error</b>: <br />'.implode('<br />', $errors);
                 $this->_data['errorMessage'] =  implode ( '<br />', $errors ) ;
-            } elseif ($this->rekamanCuti_model->add ( $data )) {
+            } elseif ($this->rekamancuti_model->add ( $data )) {
                 $this->_data['errorMessage'] =  'Berhasil Tambah Data Cuti' ;
                 $_POST = array();
                 $this->_data['isSuccess'] =  true ;
@@ -105,6 +108,60 @@ class RekamanCuti extends Controller {
         $array = $this->uri->uri_to_assoc ( 3, array ('action' ) );
         $this->_executeAdd ();
         $this->_view ( 'absensi/rekamanCutiAdd' );
+    }
+    
+    protected function _executeEdit() {
+        $array = $this->uri->uri_to_assoc ( 3, array ('id', 'action' ) );
+        if ($this->input->post ( 'kirim' ) == 'kirim') {
+            
+	    $nip = trim ( $this->input->post ( 'nip' ) );
+            $tgl_cuti = trim ( $this->input->post ( 'tgl_cuti' ) );
+	    $jml_cuti = trim ( $this->input->post ( 'jml_cuti' ) );
+	    $keterangan = trim ( $this->input->post ( 'keterangan' ) );
+        
+	    $data = array ();
+            $data ['nip'] = $nip;
+            $data ['tanggal_cuti'] = $tgl_cuti;
+	    $data ['jml_cuti'] = $jml_cuti;
+	    $data ['keterangan'] = $keterangan;
+	    
+            $errors = array ();
+            if (empty ( $nip ))  
+                $errors [] = 'Input NIP';
+		
+            if (empty ( $tgl_cuti ))  
+                $errors [] = 'Input Tanggal Cuti';
+		
+	    if (empty ( $jml_cuti ))  
+                $errors [] = 'Input Jumlah Cuti';
+	    
+	    if ($errors) {
+                $this->_data['errorMessage'] =  implode ( '<br />', $errors ) ;
+            } elseif ($this->rekamancuti_model->update ( $array['id'], $data )) {
+                $this->_data['errorMessage'] =  'Berhasil Edit Jenis Cuti' ;
+                unset($_POST);
+                $jenisCuti = $this->rekamancuti_model->get ( $array['id'] );
+                $this->_data['isSuccess'] =  true ;
+                $this->_data['dataEdit'] = $jenisCuti;    
+            } else {
+                $this->_data['errorMessage'] =  'Gagal Edit Jenis Cuti' ;
+            }
+        }    
+    }
+
+    public function edit() {
+    	if (! isAccess ( 'absensi', 'jenisCuti', 'edit'))
+            redirect (); 
+        $array = $this->uri->uri_to_assoc ( 3, array ('id' ) );
+        if (! $array ['id'])
+            show_404 ();
+        $jenisCuti = $this->rekamancuti_model->get ( $array ['id'] );
+        $this->_data['dataEdit'] = $jenisCuti; 
+        
+        if (! $jenisCuti)
+            show_404 ();
+        $this->_executeEdit();
+        $this->_view ( 'absensi/rekamanCutiEdit' );
     }
     
 }

@@ -7,12 +7,12 @@ class Jeniscuti_model extends Model {
      * Table Name
      * @var string
      */
-    protected $_table = 'tbl_pengalaman_kerja';
+    protected $_table = 'tbl_jenis_cuti';
     /**
      * Table Field Prefix
      * @var string
      */
-    protected $_prefix = '_pengalaman';
+    protected $_prefix = '_jenis_cuti';
     public function __construct() {
         // Call the Model constructor
         parent::__construct ();
@@ -27,7 +27,6 @@ class Jeniscuti_model extends Model {
             return false; 
             
         return $this->db->insert ( $this->_table, $data ) && ($this->db->affected_rows () > 0) ? true : false;
-    
     }
     /**
      * update Data
