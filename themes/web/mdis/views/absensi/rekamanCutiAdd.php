@@ -48,7 +48,7 @@ $(function() {
 				<tr>
                     <td>Tanggal Cuti</td>
                     <td><br />
-                        <?php echo form_input(array('name'=>'tanggal_cuti','value'=>get_data($_POST,'tanggal_cuti'),'class'=>'form-field', 'id'=>'tanggal_cuti'));?>
+                        <?php echo form_input(array('name'=>'tanggal_cuti','value'=>get_data($_POST,'tanggal_cuti'),'class'=>'form-field', 'id'=>'tgl_cuti'));?>
                     </td>
                 </tr>
 				<tr>
