@@ -39,13 +39,13 @@ $(function() {
                <tr>
                     <td>Jumlah Cuti</td>
                     <td>
-                        <?php echo form_input(array('name'=>'jml_cuti','value'=>get_data($dataEdit,'jml_cuti'),'class'=>'form-field','id'=>'jml_cuti'));?>
+                        <?php echo form_input(array('name'=>'jml_cuti','value'=>get_data($dataEdit,'jml_cuti'),'class'=>'form-field'));?>
                     </td>
                 </tr>
 				<tr>
                     <td>Tanggal Cuti</td>
                     <td>
-                        <?php echo form_input(array('name'=>'tanggal_cuti','value'=>get_data($dataEdit,'tanggal_cuti'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'tanggal_cuti','value'=>get_data($dataEdit,'tanggal_cuti'),'class'=>'form-field','id'=>'tgl_cuti'));?>
                     </td>
                 </tr>
 				
