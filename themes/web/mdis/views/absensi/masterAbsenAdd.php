@@ -21,33 +21,21 @@
             <?php  echo form_open('absensi/masterAbsen/add/time/' . time(),array('name'=>'formAddAbsen','id'=>'formAddAbsen'),array('kirim'=>'kirim')); ?>
             <table>
                 <tr>
-                    <td width="200">NIP</td>
-                    <td>
-                        <?php echo form_input(array('name'=>'nip','value'=>get_data($_POST,'nip'), 'class'=> 'form-field'));?>
+                    <td width="200">Hari Kerja</td>
+                    <td><br />
+                        <?php echo form_input(array('name'=>'harikerja','value'=>get_data($_POST,'harikerja'), 'class'=> 'form-field'));?>
                     </td>
                 </tr>
                 <tr>
-                    <td>Absen</td>
-                    <td>
-                        <?php echo form_input(array('name'=>'absen','value'=>get_data($_POST,'absen'),'class'=>'form-field'));?>
-                    </td>
-                </tr>
-				<tr>
-                    <td>Tgl ABsen</td>
-                    <td>
-                        <?php echo form_input(array('name'=>'tgl_absen','value'=>get_data($_POST,'tgl_absen'),'class'=>'form-field'));?>
-                    </td>
-                </tr>
-				<tr>
                     <td>Jam Masuk</td>
-                    <td>
+                    <td><br />
                         <?php echo form_input(array('name'=>'jam_masuk','value'=>get_data($_POST,'jam_masuk'),'class'=>'form-field'));?>
                     </td>
                 </tr>
-				<tr>
-                    <td>Jam Keluar</td>
-                    <td>
-                        <?php echo form_input(array('name'=>'jam_keluar','value'=>get_data($_POST,'jam_keluar'),'class'=>'form-field'));?>
+		<tr>
+                    <td>Jam Pulang</td>
+                    <td><br />
+                        <?php echo form_input(array('name'=>'jam_pulang','value'=>get_data($_POST,'jam_pulang'),'class'=>'form-field'));?>
                     </td>
                 </tr>
                 <tr>

@@ -1,10 +1,11 @@
 <?php $this->load->view('header') ?>
 <div id="content">
 <div class="column full">
+		
 		<div class="box">
-		<div class="box-header">Edit Master Absen</div>
+		<div class="box-header">Edit Absen</div>
 		<div class="box-content">
-        <?php echo isAccess('absensi','masterAbsen','view') ? anchor('absensi/masterAbsen/view', 'Master Absensi', 'class="button white"') : ''; ?>
+        <?php echo isAccess('absensi','rekamanAbsen','view') ? anchor('absensi/rekamanAbsen/view', 'Rekaman Absensi', 'class="button white"') : ''; ?>
 		<br /><br />
 
             <?php if (isset($errorMessage)) : ?>
@@ -12,24 +13,37 @@
 	        <?php endif; ?>    	
 	        
             <?php if (!(isset($isSuccess) && $isSuccess)) : ?>
-            <?php  echo form_open('absensi/masterAbsen/edit/id/'.$dataEdit['id'].'/time/' . time(),array('name'=>'formAddAbsen'),array('kirim'=>'kirim')); ?>
+            <?php  echo form_open('absensi/rekamanAbsen/edit/id/'.$dataEdit['id_absensi'].'/time/' . time(),array('name'=>'formAddAbsen'),array('kirim'=>'kirim')); ?>
             <table>
                 <tr>
-                    <td width="200">Hari Kerja</td>
+                    <td width="200">NIP</td>
                     <td><br />
-                        <?php echo form_input(array('name'=>'harikerja','value'=>get_data($dataEdit,'hari_kerja'), 'class'=> 'form-field'));?>
+                        <?php echo form_input(array('name'=>'nip','value'=>get_data($dataEdit,'nip'), 'class'=> 'form-field'));?>
                     </td>
                 </tr>
-                <tr>
+                
+				<tr>
+                    <td>Tanggal Absen</td>
+                    <td><br />
+                        <?php echo form_input(array('name'=>'tgl_absensi','value'=>get_data($dataEdit,'tgl_absensi'),'class'=>'form-field'));?>
+                    </td>
+                </tr>
+				<tr>
                     <td>Jam Masuk</td>
                     <td><br />
                         <?php echo form_input(array('name'=>'jam_masuk','value'=>get_data($dataEdit,'jam_masuk'),'class'=>'form-field'));?>
                     </td>
                 </tr>
-		<tr>
-                    <td>Jam Pulang</td>
+				<tr>
+                    <td>Jam Keluar</td>
                     <td><br />
-                        <?php echo form_input(array('name'=>'jam_pulang','value'=>get_data($dataEdit,'jam_pulang'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'jam_keluar','value'=>get_data($dataEdit,'jam_keluar'),'class'=>'form-field'));?>
+                    </td>
+                </tr>
+				<tr>
+                    <td>Keterangan</td>
+                    <td><br />
+                        <?php echo form_input(array('name'=>'keterangan','value'=>get_data($dataEdit,'keterangan'),'class'=>'form-field'));?>
                     </td>
                 </tr>
                 <tr>
