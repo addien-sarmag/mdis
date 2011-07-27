@@ -68,7 +68,7 @@ class RekamanCuti_model extends Model {
         $this->db->from ( $this->_table );
         $this->db->limit ( $limit, $offset );
         $query = $this->db->get ();
-        return $query->result_array ();
+        return $query->row_array ();
     }
 	
 	

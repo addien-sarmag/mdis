@@ -30,7 +30,7 @@ $(function() {
 	        <?php endif; ?>    	
 	        
 	        <?php if (!(isset($isSuccess) && $isSuccess)) : ?>
-            <?php  echo form_open('absensi/rekamanCuti/add/time/' . time(),array('name'=>'formAddCuti','id'=>'formAddCuti'),array('kirim'=>'kirim')); ?>
+            <?php  echo form_open('absensi/rekamanCuti/add/time/' . time(),array('name'=>'formAddCuti','id_cuti'=>'formAddCuti'),array('kirim'=>'kirim')); ?>
             <table>
                 <tr>
                     <td width="200">NIP</td>
@@ -39,21 +39,15 @@ $(function() {
                     </td>
                 </tr>
                 <tr>
-                    <td>Tanggal Cuti</td>
-                    <td><br />
-                        <?php echo form_input(array('name'=>'tgl_cuti','value'=>get_data($_POST,'tgl_cuti'),'class'=>'form-field','id'=>'tgl_cuti'));?>
-                    </td>
-                </tr>
-				<tr>
                     <td>Jumlah Cuti</td>
                     <td><br />
-                        <?php echo form_input(array('name'=>'jml_cuti','value'=>get_data($_POST,'jml_cuti'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'jml_cuti','value'=>get_data($_POST,'jml_cuti'),'class'=>'form-field','id'=>'jml_cuti'));?>
                     </td>
                 </tr>
 				<tr>
-                    <td>Keterangan</td>
+                    <td>Tanggal Cuti</td>
                     <td><br />
-                        <?php echo form_input(array('name'=>'keterangan','value'=>get_data($_POST,'keterangan'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'tanggal_cuti','value'=>get_data($_POST,'tanggal_cuti'),'class'=>'form-field'));?>
                     </td>
                 </tr>
 				

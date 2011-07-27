@@ -37,23 +37,18 @@ $(function() {
                     </td>
                 </tr>
                <tr>
-                    <td>Tanggal Cuti</td>
-                    <td>
-                        <?php echo form_input(array('name'=>'tgl_cuti','value'=>get_data($dataEdit,'tanggal_cuti'),'class'=>'form-field','id'=>'tgl_cuti'));?>
-                    </td>
-                </tr>
-				<tr>
                     <td>Jumlah Cuti</td>
                     <td>
-                        <?php echo form_input(array('name'=>'jml_cuti','value'=>get_data($dataEdit,'jml_cuti'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'jml_cuti','value'=>get_data($dataEdit,'jml_cuti'),'class'=>'form-field','id'=>'jml_cuti'));?>
                     </td>
                 </tr>
 				<tr>
-                    <td>Keterangan</td>
+                    <td>Tanggal Cuti</td>
                     <td>
-                        <?php echo form_input(array('name'=>'keterangan','value'=>get_data($dataEdit,'keterangan'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'tanggal_cuti','value'=>get_data($dataEdit,'tanggal_cuti'),'class'=>'form-field'));?>
                     </td>
                 </tr>
+				
                 <tr>
                     <td>&nbsp;</td>
                     <td>

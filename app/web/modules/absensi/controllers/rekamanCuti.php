@@ -23,10 +23,10 @@ class RekamanCuti extends Controller {
         // delete action
         if (isAccess('absensi','rekamanCuti','delete') && $array ['action'] == 'delete' && $array ['id']) {
             if ($this->rekamancuti_model->delete($array['id'])) {
-                $this->_data['errorMessage'] =  'Berhasil delete data absensi' ;
+                $this->_data['errorMessage'] =  'Berhasil delete rekaman cuti' ;
                 $this->_data['isSuccess'] =  true ;
             } else {
-                $this->_data['errorMessage'] =  'Gagal delete data absensi' ;
+                $this->_data['errorMessage'] =  'Gagal delete rekaman cuti' ;
             }
         }
     }
@@ -65,15 +65,15 @@ class RekamanCuti extends Controller {
         
         if ($this->input->post ( 'kirim' ) == 'kirim') {
             $nip = trim ( $this->input->post ( 'nip' ) );
-            $tgl_cuti = trim ( $this->input->post ( 'tgl_cuti' ) );
-	    $jml_cuti = trim ( $this->input->post ( 'jml_cuti' ) );
-	    $keterangan = trim ( $this->input->post ( 'keterangan' ) );
+            $jml_cuti = trim ( $this->input->post ( 'jml_cuti' ) );
+			$tanggal_cuti = trim ( $this->input->post ( 'tanggal_cuti' ) );
+	    
         
-	    $data = array ();
+			$data = array ();
             $data ['nip'] = $nip;
-            $data ['tanggal_cuti'] = $tgl_cuti;
-	    $data ['jml_cuti'] = $jml_cuti;
-	    $data ['keterangan'] = $keterangan;
+            $data ['jml_cuti'] = $jml_cuti;
+			$data ['tanggal_cuti'] = $tanggal_cuti;
+	    
             
 	    $errors = array ();
             if (empty ( $nip )) {
@@ -85,7 +85,7 @@ class RekamanCuti extends Controller {
             		$errors [] = 'NIP Sudah Terdaftar. Silahkan Diganti';
             }*/
             
-            if (empty ( $tgl_cuti ))
+            if (empty ( $tanggal_cuti ))
                 $errors [] = 'Input Tanggal Cuti';
 		
             if ($errors) {
@@ -115,50 +115,49 @@ class RekamanCuti extends Controller {
         if ($this->input->post ( 'kirim' ) == 'kirim') {
             
 	    $nip = trim ( $this->input->post ( 'nip' ) );
-            $tgl_cuti = trim ( $this->input->post ( 'tgl_cuti' ) );
-	    $jml_cuti = trim ( $this->input->post ( 'jml_cuti' ) );
-	    $keterangan = trim ( $this->input->post ( 'keterangan' ) );
+            $jml_cuti = trim ( $this->input->post ( 'jml_cuti' ) );
+	    $tanggal_cuti = trim ( $this->input->post ( 'tanggal_cuti' ) );
+	    
         
 	    $data = array ();
             $data ['nip'] = $nip;
-            $data ['tanggal_cuti'] = $tgl_cuti;
-	    $data ['jml_cuti'] = $jml_cuti;
-	    $data ['keterangan'] = $keterangan;
-	    
+            $data ['jml_cuti'] = $jml_cuti;
+	    $data ['tanggal_cuti'] = $tanggal_cuti;
+	   
             $errors = array ();
             if (empty ( $nip ))  
                 $errors [] = 'Input NIP';
 		
-            if (empty ( $tgl_cuti ))  
-                $errors [] = 'Input Tanggal Cuti';
-		
-	    if (empty ( $jml_cuti ))  
+            if (empty ( $jml_cuti ))  
                 $errors [] = 'Input Jumlah Cuti';
+		
+	    if (empty ( $tanggal_cuti ))  
+                $errors [] = 'Input Tanggal Cuti';
 	    
 	    if ($errors) {
                 $this->_data['errorMessage'] =  implode ( '<br />', $errors ) ;
             } elseif ($this->rekamancuti_model->update ( $array['id'], $data )) {
-                $this->_data['errorMessage'] =  'Berhasil Edit Jenis Cuti' ;
+                $this->_data['errorMessage'] =  'Berhasil Edit Rekaman Cuti' ;
                 unset($_POST);
-                $jenisCuti = $this->rekamancuti_model->get ( $array['id'] );
+                $rekamanCuti = $this->rekamancuti_model->get ( $array['id'] );
                 $this->_data['isSuccess'] =  true ;
-                $this->_data['dataEdit'] = $jenisCuti;    
+                $this->_data['dataEdit'] = $rekamanCuti;    
             } else {
-                $this->_data['errorMessage'] =  'Gagal Edit Jenis Cuti' ;
+                $this->_data['errorMessage'] =  'Gagal Edit Rekaman Cuti' ;
             }
         }    
     }
 
     public function edit() {
-    	if (! isAccess ( 'absensi', 'jenisCuti', 'edit'))
+    	if (! isAccess ( 'absensi', 'rekamanCuti', 'edit'))
             redirect (); 
         $array = $this->uri->uri_to_assoc ( 3, array ('id' ) );
         if (! $array ['id'])
             show_404 ();
-        $jenisCuti = $this->rekamancuti_model->get ( $array ['id'] );
-        $this->_data['dataEdit'] = $jenisCuti; 
+        $rekamanCuti = $this->rekamancuti_model->get ( $array ['id'] );
+        $this->_data['dataEdit'] = $rekamanCuti; 
         
-        if (! $jenisCuti)
+        if (! $rekamanCuti)
             show_404 ();
         $this->_executeEdit();
         $this->_view ( 'absensi/rekamanCutiEdit' );
