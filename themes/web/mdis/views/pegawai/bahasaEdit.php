@@ -4,7 +4,7 @@
 <script type="text/javascript">
 $(function() {
  
-	$("#tanggalAwal  , #tanggalAkhir").datepicker({
+	$("#tanggalMasuk  , #tanggalKeluar").datepicker({
 	   dateFormat: 'yy-mm-dd', 
 	   changeMonth: true,
 	   changeYear: true
@@ -18,9 +18,9 @@ $(function() {
 <div class="column full">
 		
 		<div class="box">
-		<div class="box-header">Tambah Kontrak </div>
+		<div class="box-header">Edit Bahasa</div>
 		<div class="box-content">
-        <?php echo isAccess('pegawai','ktp','view') ? anchor('pegawai/kontrakPegawai/view/nip/'.get_data($uri_to_assoc,'nip'), '<span class="icon_text preview"></span>Daftar Kontrak', 'class="button white fr"') : ''; ?>
+        <?php echo isAccess('pegawai','bahasa','view') ? anchor('pegawai/bahasa/view/id/'.get_data($uri_to_assoc,'id').'/nip/'.get_data($dataEdit,'nip_karyawan'), '<span class="icon_text preview"></span>Daftar Bahasa', 'class="button white fr"') : ''; ?>
         <br /><br />      
         
 			<div id="loading" style="display:none;"><img src="loading.gif" alt="loading..." /></div>
@@ -31,41 +31,38 @@ $(function() {
 	        <?php endif; ?>    	
 	        
 	        <?php if (!(isset($isSuccess) && $isSuccess)) : ?>
-            <?php  echo form_open('pegawai/kontrakPegawai/add/nip/'.get_data($uri_to_assoc,'nip').'/time/' . time(),array('name'=>'formAddkontrakPegawai','id'=>'formAddkontrakPegawai'),array('kirim'=>'kirim')); ?>
+            <?php  echo form_open('pegawai/bahasa/edit/id/'.get_data($uri_to_assoc,'id').'/nip/'.get_data($uri_to_assoc,'nip').'/time/' . time(),array('name'=>'formAddbahasa','id'=>'formAddbahasa'),array('kirim'=>'kirim')); ?>
             <table> 
             	<tr>
                     <td width="200">Nip</td>
                     <td>
-                    	<?php $array =  ! empty($uri_to_assoc['nip'])  ? array('name'=>'nip','value'=>get_data($uri_to_assoc,'nip'),'class'=>'form-field','readonly'=>false) : 
-                    					array('name'=>'nip','value'=>get_data($uri_to_assoc,'nip'),'class'=>'form-field' );
+                    	<?php $array =   array('name'=>'nip','value'=>get_data($dataEdit,'nip_karyawan'),'class'=>'form-field','readonly'=>false) ;
                     	?>
                         
                     	<?php echo form_input($array);?>
                     </td>
                 </tr> 
-                <tr>
-                    <td width="200">Nomor Kontrak </td>
-                    <td>
-                        <?php echo form_input(array('name'=>'nomor','value'=>get_data($_POST,'nomor'),'class'=>'form-field'));?>
-                    </td>
-                </tr>  
                  <tr>
-                    <td width="200">Tanggal Mulai</td>
+                    <td width="200">Tipe</td>
                     <td>
-                        <?php echo form_input(array('name'=>'tanggalAwal','id'=>'tanggalAwal','value'=>get_data($_POST,'tanggalAwal'),'class'=>'form-field' ));?>
+                    	<div class="radiocheck" style="margin-bottom:10px;">
+                        <?php echo $htmlRadioStatus?>
+                        </div>
                     </td>
                 </tr>
-                 <tr>
-                    <td width="200">Tanggal Selesai</td>
-                    <td>
-                        <?php echo form_input(array('name'=>'tanggalAkhir','id'=>'tanggalAkhir','value'=>get_data($_POST,'tanggalAkhir'),'class'=>'form-field' ));?>
-                    </td>
-                </tr>
-                 
+                
                 <tr>
-                    <td width="200">Keterangan</td>
+                    <td width="200">Nama</td>
                     <td>
-                        <?php echo form_textarea(array('name'=>'desc','value'=>get_data($_POST,'desc'),'class'=>'form-field','style'=>'width: 400px;height: 100px;'));?>
+                        <?php echo form_input(array('name'=>'nama','id'=>'nama','value'=>get_data($dataEdit,'nama_bahasa'),'class'=>'form-field'));?>
+                    </td>
+                </tr>   
+                <tr>
+                    <td width="200">Status</td>
+                    <td>
+                    	<div class="radiocheck" style="margin-bottom:10px;">
+                        <?php echo $htmlRadiotTipe?>
+                        </div>
                     </td>
                 </tr>  
                 <tr>

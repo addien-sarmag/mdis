@@ -4,7 +4,7 @@
 <script type="text/javascript">
 $(function() {
  
-	$("#tanggalMasuk  , #tanggalKeluar").datepicker({
+	$("#dateBorn").datepicker({
 	   dateFormat: 'yy-mm-dd', 
 	   changeMonth: true,
 	   changeYear: true
@@ -18,9 +18,9 @@ $(function() {
 <div class="column full">
 		
 		<div class="box">
-		<div class="box-header">Tambah Pengalaman Kerja</div>
+		<div class="box-header">Edit Keluarga</div>
 		<div class="box-content">
-        <?php echo isAccess('pegawai','pengalamanKerja','view') ? anchor('pegawai/pengalamanKerja/view/nip/'.get_data($uri_to_assoc,'nip'), '<span class="icon_text preview"></span>Daftar pengalaman Kerja', 'class="button white fr"') : ''; ?>
+        <?php echo isAccess('pegawai','keluarga','view') ? anchor('pegawai/keluarga/view/nip/'.get_data($uri_to_assoc,'nip'), '<span class="icon_text preview"></span>Daftar Keluarga', 'class="button white fr"') : ''; ?>
         <br /><br />      
         
 			<div id="loading" style="display:none;"><img src="loading.gif" alt="loading..." /></div>
@@ -31,7 +31,7 @@ $(function() {
 	        <?php endif; ?>    	
 	        
 	        <?php if (!(isset($isSuccess) && $isSuccess)) : ?>
-            <?php  echo form_open('pegawai/pengalamanKerja/add/nip/'.get_data($uri_to_assoc,'nip').'/time/' . time(),array('name'=>'formAddpengalamanKerja','id'=>'formAddpengalamanKerja'),array('kirim'=>'kirim')); ?>
+            <?php  echo form_open('pegawai/keluarga/edit/id/'.get_data($dataEdit,'id_keluarga').'/nip/'.get_data($uri_to_assoc,'nip').'/time/' . time(),array('name'=>'formAddkeluarga','id'=>'formAddkeluarga'),array('kirim'=>'kirim')); ?>
             <table> 
             	<tr>
                     <td width="200">Nip</td>
@@ -44,42 +44,54 @@ $(function() {
                     </td>
                 </tr> 
                 <tr>
-                    <td width="200">Nama Perusahaan</td>
+                    <td width="200">Nama</td>
                     <td>
-                        <?php echo form_input(array('name'=>'company','value'=>get_data($_POST,'company'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'nama','value'=>get_data($dataEdit,'nama_keluarga'),'class'=>'form-field'));?>
+                    </td>
+                </tr> 
+                 <tr>
+                    <td width="200">Jenis Kelamin</td>
+                    <td>
+                    	<div class="radiocheck" style="margin-bottom:10px;">
+                        <?php echo $htmlRadioSex;?>
+                        </div>
+                    </td>
+                </tr> 
+                <tr>
+                    <td width="200">Hubungan</td>
+                    <td>
+                    	<div class="radiocheck" style="margin-bottom:10px;">
+                        <?php echo $htmlTipeKeluarga;?>
+                        </div>
                     </td>
                 </tr>  
                 <tr>
-                    <td width="200">Jabatan</td>
+                    <td width="200">Tempat / Tanggal Lahir</td>
                     <td>
-                        <?php echo form_input(array('name'=>'jabatan','value'=>get_data($_POST,'jabatan'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'placeBorn','value'=>get_data($dataEdit,'tempatLahir_keluarga'),'class'=>'form-field'));?>
+                         <?php echo form_input(array('name'=>'dateBorn','id'=>'dateBorn','value'=>get_data($dataEdit,'tanggalLahir_keluarga'),'class'=>'form-field','style'=>"width: 100px;"));?>
                     </td>
                 </tr>  
                 <tr>
-                    <td width="200">Tanggal Masuk</td>
+                    <td width="200">Pendidikan</td>
                     <td>
-                        <?php echo form_input(array('name'=>'tanggalMasuk','id'=>'tanggalMasuk','value'=>get_data($_POST,'tanggalMasuk'),'class'=>'form-field'));?>
+                        <?php echo $htmlPendidikan?>
                     </td>
-                </tr>  
+                </tr> 
                 <tr>
-                    <td width="200">Tanggal Keluar</td>
+                    <td width="200">Pekerjaan</td>
                     <td>
-                        <?php echo form_input(array('name'=>'tanggalKeluar','id'=>'tanggalKeluar','value'=>get_data($_POST,'tanggalKeluar'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'pekerjaan','value'=>get_data($dataEdit,'pekerjaan_keluarga'),'class'=>'form-field'));?>
                     </td>
-                </tr>  
-                 
-                <tr>
-                    <td width="200">Gaji Terakhir</td>
+                </tr> 
+                 <tr>
+                    <td width="200">Keterangan</td>
                     <td>
-                        <?php echo form_input(array('name'=>'gaji','value'=>get_data($_POST,'gaji'),'class'=>'form-field'));?>
+                         
+                        <?php echo form_textarea(array('name'=>'desc','value'=>get_data($dataEdit,'keterangan_keluarga'), 'class'=> 'form-field',"style"=>"width: 400px;height: 100px;"));?>
                     </td>
-                </tr>  
-                <tr>
-                    <td width="200">Alasan Resend</td>
-                    <td>
-                        <?php echo form_textarea(array('name'=>'alasan','value'=>get_data($_POST,'alasan'),'class'=>'form-field','style'=>'width: 400px;height: 100px;'));?>
-                    </td>
-                </tr>  
+                </tr> 
+                
                 <tr>
                     <td>&nbsp;</td>
                     <td>

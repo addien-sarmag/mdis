@@ -18,9 +18,9 @@ $(function() {
 <div class="column full">
 		
 		<div class="box">
-		<div class="box-header">Tambah Kontrak </div>
+		<div class="box-header">Edit Rekening</div>
 		<div class="box-content">
-        <?php echo isAccess('pegawai','ktp','view') ? anchor('pegawai/kontrakPegawai/view/nip/'.get_data($uri_to_assoc,'nip'), '<span class="icon_text preview"></span>Daftar Kontrak', 'class="button white fr"') : ''; ?>
+        <?php echo isAccess('pegawai','rekening','view') ? anchor('pegawai/rekening/view/nip/'.get_data($uri_to_assoc,'nip'), '<span class="icon_text preview"></span>Daftar rekening', 'class="button white fr"') : ''; ?>
         <br /><br />      
         
 			<div id="loading" style="display:none;"><img src="loading.gif" alt="loading..." /></div>
@@ -31,7 +31,7 @@ $(function() {
 	        <?php endif; ?>    	
 	        
 	        <?php if (!(isset($isSuccess) && $isSuccess)) : ?>
-            <?php  echo form_open('pegawai/kontrakPegawai/add/nip/'.get_data($uri_to_assoc,'nip').'/time/' . time(),array('name'=>'formAddkontrakPegawai','id'=>'formAddkontrakPegawai'),array('kirim'=>'kirim')); ?>
+            <?php  echo form_open('pegawai/rekening/edit/id/'.$uri_to_assoc['id'].'/nip/'.get_data($uri_to_assoc,'nip').'/time/' . time(),array('name'=>'formAddrekening','id'=>'formAddrekening'),array('kirim'=>'kirim')); ?>
             <table> 
             	<tr>
                     <td width="200">Nip</td>
@@ -44,30 +44,31 @@ $(function() {
                     </td>
                 </tr> 
                 <tr>
-                    <td width="200">Nomor Kontrak </td>
+                    <td width="200">Nomor Rekening</td>
                     <td>
-                        <?php echo form_input(array('name'=>'nomor','value'=>get_data($_POST,'nomor'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'noRekening','value'=>get_data($dataEdit,'no_rekening'),'class'=>'form-field'));?>
                     </td>
                 </tr>  
                  <tr>
-                    <td width="200">Tanggal Mulai</td>
+                    <td width="200">Nama Bank</td>
                     <td>
-                        <?php echo form_input(array('name'=>'tanggalAwal','id'=>'tanggalAwal','value'=>get_data($_POST,'tanggalAwal'),'class'=>'form-field' ));?>
+                        <?php echo form_input(array('name'=>'nama','value'=>get_data($dataEdit,'namaBank_rekening'),'class'=>'form-field'));?>
                     </td>
-                </tr>
-                 <tr>
-                    <td width="200">Tanggal Selesai</td>
-                    <td>
-                        <?php echo form_input(array('name'=>'tanggalAkhir','id'=>'tanggalAkhir','value'=>get_data($_POST,'tanggalAkhir'),'class'=>'form-field' ));?>
-                    </td>
-                </tr>
-                 
+                </tr> 
                 <tr>
-                    <td width="200">Keterangan</td>
+                    <td width="200">Cabang Bank</td>
                     <td>
-                        <?php echo form_textarea(array('name'=>'desc','value'=>get_data($_POST,'desc'),'class'=>'form-field','style'=>'width: 400px;height: 100px;'));?>
+                        <?php echo form_input(array('name'=>'cabang','id'=>'cabang','value'=>get_data($dataEdit,'cabangBank_rekening'),'class'=>'form-field'));?>
                     </td>
                 </tr>  
+                <tr>
+                    <td width="200">Pemakaian</td>
+                    <td>
+                    	<div class="radiocheck" style="margin-bottom:10px;">
+                        <?php echo $htmlRadiotTipe?>
+                        </div>
+                    </td>
+                </tr>   
                 <tr>
                     <td>&nbsp;</td>
                     <td>

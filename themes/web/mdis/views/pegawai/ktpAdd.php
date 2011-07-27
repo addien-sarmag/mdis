@@ -18,9 +18,9 @@ $(function() {
 <div class="column full">
 		
 		<div class="box">
-		<div class="box-header">Tambah Kontrak </div>
+		<div class="box-header">Tambah KTP</div>
 		<div class="box-content">
-        <?php echo isAccess('pegawai','ktp','view') ? anchor('pegawai/kontrakPegawai/view/nip/'.get_data($uri_to_assoc,'nip'), '<span class="icon_text preview"></span>Daftar Kontrak', 'class="button white fr"') : ''; ?>
+        <?php echo isAccess('pegawai','ktp','view') ? anchor('pegawai/ktp/view/nip/'.get_data($uri_to_assoc,'nip'), '<span class="icon_text preview"></span>Daftar KTP', 'class="button white fr"') : ''; ?>
         <br /><br />      
         
 			<div id="loading" style="display:none;"><img src="loading.gif" alt="loading..." /></div>
@@ -31,10 +31,10 @@ $(function() {
 	        <?php endif; ?>    	
 	        
 	        <?php if (!(isset($isSuccess) && $isSuccess)) : ?>
-            <?php  echo form_open('pegawai/kontrakPegawai/add/nip/'.get_data($uri_to_assoc,'nip').'/time/' . time(),array('name'=>'formAddkontrakPegawai','id'=>'formAddkontrakPegawai'),array('kirim'=>'kirim')); ?>
+            <?php  echo form_open('pegawai/ktp/add/nip/'.get_data($uri_to_assoc,'nip').'/time/' . time(),array('name'=>'formAddktp','id'=>'formAddktp'),array('kirim'=>'kirim')); ?>
             <table> 
             	<tr>
-                    <td width="200">Nip</td>
+                    <td width="200">NIP</td>
                     <td>
                     	<?php $array =  ! empty($uri_to_assoc['nip'])  ? array('name'=>'nip','value'=>get_data($uri_to_assoc,'nip'),'class'=>'form-field','readonly'=>false) : 
                     					array('name'=>'nip','value'=>get_data($uri_to_assoc,'nip'),'class'=>'form-field' );
@@ -44,30 +44,54 @@ $(function() {
                     </td>
                 </tr> 
                 <tr>
-                    <td width="200">Nomor Kontrak </td>
+                    <td width="200">Nomor KTP</td>
                     <td>
-                        <?php echo form_input(array('name'=>'nomor','value'=>get_data($_POST,'nomor'),'class'=>'form-field'));?>
+                        <?php echo form_input(array('name'=>'noKTP','value'=>get_data($_POST,'noKTP'),'class'=>'form-field'));?>
+                    </td>
+                </tr>  
+                <tr>
+                    <td width="200">Alamat</td>
+                    <td>
+                        <?php echo form_textarea(array('name'=>'alamat','value'=>get_data($_POST,'alamat'),'class'=>'form-field','style'=>'width: 400px;height: 100px;'));?>
+                    </td>
+                </tr>  
+                <tr>
+                    <td width="200">Kelurahan</td>
+                    <td>
+                        <?php echo form_input(array('name'=>'kelurahan','id'=>'kelurahan','value'=>get_data($_POST,'kelurahan'),'class'=>'form-field'));?>
+                    </td>
+                </tr>  
+                <tr>
+                    <td width="200">Kecamatan</td>
+                    <td>
+                        <?php echo form_input(array('name'=>'kecamatan','id'=>'kecamatan','value'=>get_data($_POST,'kecamatan'),'class'=>'form-field'));?>
+                    </td>
+                </tr>  
+                 
+                <tr>
+                    <td width="200">Kota</td>
+                    <td>
+                        <?php echo form_input(array('name'=>'kota','value'=>get_data($_POST,'kota'),'class'=>'form-field'));?>
+                    </td>
+                </tr>  
+                <tr>
+                    <td width="200">Provinsi</td>
+                    <td>
+                        <?php echo form_input(array('name'=>'provinsi','value'=>get_data($_POST,'provinsi'),'class'=>'form-field' ));?>
                     </td>
                 </tr>  
                  <tr>
-                    <td width="200">Tanggal Mulai</td>
+                    <td width="200">Tanggal Jadi</td>
                     <td>
                         <?php echo form_input(array('name'=>'tanggalAwal','id'=>'tanggalAwal','value'=>get_data($_POST,'tanggalAwal'),'class'=>'form-field' ));?>
                     </td>
                 </tr>
                  <tr>
-                    <td width="200">Tanggal Selesai</td>
+                    <td width="200">Tanggal Berlaku Hingga</td>
                     <td>
                         <?php echo form_input(array('name'=>'tanggalAkhir','id'=>'tanggalAkhir','value'=>get_data($_POST,'tanggalAkhir'),'class'=>'form-field' ));?>
                     </td>
                 </tr>
-                 
-                <tr>
-                    <td width="200">Keterangan</td>
-                    <td>
-                        <?php echo form_textarea(array('name'=>'desc','value'=>get_data($_POST,'desc'),'class'=>'form-field','style'=>'width: 400px;height: 100px;'));?>
-                    </td>
-                </tr>  
                 <tr>
                     <td>&nbsp;</td>
                     <td>
