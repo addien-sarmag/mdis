@@ -16,7 +16,7 @@ sub {vertical-align:text-bottom;}
 input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
 /*to enable resizing for IE*/
 input,textarea,select{*font-size:100%;}
-/*because legend doesnÃƒâ€¢t inherit in IE */
+/*because legend doesn�t inherit in IE */
 legend{color:#000;}
 a {outline: 0;}
 /* --------------
@@ -113,12 +113,12 @@ BUTTONS
 	background: white url("../images/back_white_hover.jpg") repeat-x left top;
 }
 .red{
-	background: #940101 url("../images/back_red.jpg") repeat-x left top;
+	background: #940101 url("../images/back_blue.jpg") repeat-x left top;
 	color: white !important;
-	border: 1px solid #eb0000;
+	border: 1px solid #2a9fee;
 }
 .red:hover {
-	background: #cb0000 url("../images/back_red_hover.jpg") repeat-x left top;
+	background: #cb0000 url("../images/back_blue_hover.jpg") repeat-x left top;
 }
 .black{
 	background: #141213 url("../images/back_black.jpg") repeat-x left top;
@@ -129,12 +129,12 @@ BUTTONS
 	background: #292728 url("../images/back_black_hover.jpg") repeat-x left top;
 }
 .themed{
-	background: #0669af url("../images/back_red_2.jpg") repeat-x left top;
+	background: #0669af url("../images/back_blue.jpg") repeat-x left top;
 	color: white !important;
-	border: 1px solid #d40a0a;
+	border: 1px solid #2a9fee;
 }
 .themed:hover {
-	background: #248bd0 url("../images/back_red_2_hover.jpg") repeat-x left top;
+	background: #248bd0 url("../images/back_blue_2_hover.jpg") repeat-x left top;
 }
 .grey{
 	background: #bababa url("../images/back_grey.jpg") repeat-x left top;
@@ -361,9 +361,6 @@ ICONS
 .zip {
 	background:url("../images/zip.png") repeat-x left top;
 }
-.print {
-	background:url("../images/print.png") repeat-x left top;
-}
 /* --------------
 BOX LOGIN
 * -------------*/ 
@@ -389,9 +386,9 @@ BOX LOGIN
 	font-size: 14px;
 	-moz-box-shadow: 0 0 2px #dddddd;
 	-webkit-box-shadow: 0 0 2px #dddddd;
-	background: #ececec url("../images/back_h2_box_red.jpg") repeat-x left top;
+	background: #ececec url("../images/back_h2_box_blue.jpg") repeat-x left top;
 	color: white;
-	border: 1px solid #8E0F0F;
+	border: 1px solid #2a9fee;
 	text-shadow: 0 1px 0 #360000;
 }
 #box-login {
@@ -427,7 +424,7 @@ BOX LOGIN
 	font-weight: bold;
 	text-transform: capitalize;
 	margin: 0 0 2px 0;
-	color: #8f0f10;
+	color: #005898;
 }
 .rem {
 	font-size: 12px;
@@ -1081,7 +1078,7 @@ margin: 0 0 20px 0;
 	font-size: 14px;
 	-moz-box-shadow: 0 0 2px #dddddd;
 	-webkit-box-shadow: 0 0 2px #dddddd;
-	color: #6d0909;
+	color: #0061b7;
 }
 .themed_box .box-header {
 	background: #ececec url("../images/back_h2_box_red.jpg") repeat-x left top;
@@ -1433,11 +1430,23 @@ FORMS
 	color: black;
 	font-size: 12px;
 	width: 200px;
-}	
-.form-field:focus {
+}
+.form-textarea{
+	background: none;
+	height: 100px;
+	padding: 2px 0 2px 5px;
+	border: 1px solid #c0c0c0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin: 0 0 12px 0;
+	color: black;
+	font-size: 12px;
+	width: 400px;
+}
+.form-field:focus , .form-textarea:focus {
 	-moz-box-shadow: 0 2px 1px #e1e1e1;
 	border: 1px solid #b5b5b5;
-}
+} 
 .form-field.error_small {
 	background-color: #ffd1d1;
 	border: 1px solid #f8acac;
@@ -1495,9 +1504,7 @@ textarea.full {
 select {
 	background: #f3f3f3;
 	border: 1px solid #e1e1e1;
-	padding: 4px;
-	width: 230px;
-	margin: 0 0 10px 0;
+	padding: 2px;
 }
  /* --------------
 WIDGET 
@@ -1565,6 +1572,8 @@ background: white url("../images/back_white_hover.jpg") repeat-x left top;
 }	
  #tabledata .odd, #tabledata .even {
 	line-height: 30px;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
 }	
 .paging_full_numbers {
 	width: auto !important;
@@ -1573,6 +1582,219 @@ background: white url("../images/back_white_hover.jpg") repeat-x left top;
 background-image:none;
 opacity:0.2;
 }
+ /* --------------
+TABLES
+* -------------*/
+  .box-table {
+	padding: 0;
+ }
+ .tablebox {
+	width: 100%;
+ }
+  .tc {
+	text-align: center;
+ }
+ .box-table th {
+	padding: 0 20px;
+	border-left: 1px solid #d6d6d6;
+	text-transform: capitalize;
+ 	font-weight: bold;
+ }
+ .box-table td {
+	padding: 0 20px; 
+}
+.box-table .odd {
+	height: 40px;
+	background: white;
+}
+.box-table .even {
+	height: 40px;
+	background: #f7f7f7;
+}
+#tablebox  .first {
+	border-left:0;
+ }
+ .table-header {
+ 	
+	line-height: 40px;
+	background: #e8e8e8 url("../images/back_header_table.jpg") repeat-x left top;
+	width: 100%;
+ 	
+ }
+ th { text-align: center; }
+ #tablebox .button {
+	margin: 0;
+ }
+.pagination {
+	height: 35px;
+	text-align: center;
+	background: #e8e8e8 url("../images/back_pagination_table.jpg") repeat-x left top;
+	border: 1px solid #E5E4E4;
+}	
+.pagination li {
+	display: inline;
+}
+.pagination .button {
+	margin: 5px 0 0 0;
+}	
+.pagination  .active{
+	background: url("../images/back_nav_hover.jpg") repeat-x left center;	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow:inset 0 2px 3px black;
+	cursor: default;
+	border: 1px solid black;
+	color: white;
+}
+.pagination .active:hover {
+	background: url("../images/back_nav_hover.jpg") repeat-x left center;	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow:inset 0 2px 3px black;
+	cursor: default;
+	border: 1px solid black;
+	color: white;
+}
+tbody .button {
+	margin: 0 3px !important;
+}
+  /* --------------
+TABS
+* -------------*/
+.box .tabs-nav {
+	margin:0;
+	padding:0;
+	background: none;
+	border: 0 !important;
+	-moz-border-radius: 0;
+	-webkit-border-radius:0;
+	line-height: 19px;
+	position: absolute;
+	right:32px;
+	top:4px;
+}
+.box.tabs {
+	border: 0;
+	background: none;
+	font-family: Tahoma;
+	-moz-border-radius: 0;
+	-webbkit-border-radius: 0;
+	font-size: 12px;
+	color: black;
+	padding: 0;
+}
+.box .tabs-nav .tab  {
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	padding-bottom: 0 !important;
+	border: 0 !important;
+	padding: 0 3px;
+	font-weight: bold;
+	background: #d4d4d4;
+	border: 1px solid #b2b2b2 !important;
+	border-bottom: 0 !important;
+}
+.themed_box  .tabs-nav .tab {
+	background: #f6cece;
+	border: 1px solid #8e0f0f !important;
+	border-bottom: 0 !important;
+}
+.black_box .tabs-nav .tab {
+	background: #cfcfcf;
+	border: 1px solid #000000 !important;
+	border-bottom: 0 !important;
+}
+.box .tabs-nav .tab a {
+	color: black;
+}
+.box .tabs-nav .tab.ui-tabs-selected  {
+	background: white;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	-moz-box-shadow: 0 0 0;
+	-webkit-box-shadow: 0 0 0;
+	padding-bottom: 0 !important;
+}
+.box .tabs-nav .tab.ui-state-hover  {
+	background: white;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	padding-bottom: 0 !important;
+	-moz-box-shadow: 0 0 0;
+	-webkit-box-shadow: 0 0 0;
+}
+.tab a {
+	color: white;
+	height: 100%;
+	display: block;
+	padding: 0 15px;
+	text-align: center;
+	font-size: 12px;
+	text-shadow: 0 0;
+}
+.tab.first {
+	margin: 4px 2px 0 0;
+}	
+.ui-tabs .ui-tabs-panel {
+	padding: 0;
+
+}
+/* --------------
+ACCORDION
+* -------------*/
+.accordion h3 {
+	background: url("../images/back_grey.jpg") repeat-x left top;
+	padding-bottom: 0 !important;
+	border: 1px solid #d8d8d8 !important;
+	padding: 0 3px;
+	font-weight: bold;
+	-moz-box-shadow: 0 0 0;
+}
+.accordion h3 a {
+ color: black !important;
+}
+.accordion .ui-corner-all {
+	-moz-border-radius: 5px;
+	-webkit-border-radius : 5px;
+}
+.accordion h3.ui-state-active  {
+	background: white url("../images/back_tab_active.jpg") repeat-x left top;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomleft: 0;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	padding-bottom: 0 !important;
+	border-top: 1px solid #d0d0d0 !important;
+	border-left: 1px solid #d0d0d0 !important;
+	border-right: 1px solid #d0d0d0 !important;
+	border-bottom: 0 !important;
+	-moz-box-shadow: 0 0 0;
+}
+.ui-accordion-content {
+	border-top: 0!important;
+	border-left: 1px solid #d0d0d0 !important;
+	border-right: 1px solid #d0d0d0 !important;
+	border-bottom: 1px solid #d0d0d0 !important;
+}
+
  /* --------------
 TABLES
 * -------------*/
@@ -1816,6 +2038,10 @@ DIALOG
 .ui-dialog .ui-dialog-titlebar-close {
 	padding: 0;
 }
+
+
+/* ============================ edit ============== */
+
 /* --------------
 WYSIWYG
 * -------------*/
@@ -1931,7 +2157,7 @@ div.datepicker {
 	-moz-box-shadow:0 2px 3px #5b0000 inset;
 }
 .ui-datepicker .ui-datepicker-header {
-	background: url("../images/back_h2_box_red.jpg") repeat-x left top;
+	background: url("../images/back_h2_box_blue.jpg") repeat-x left top;
 	border: 1px solid #8e0f0f;
 	-moz-border-radius-topleft: 5px;
 	-moz-border-radius-topright: 5px;
@@ -2027,9 +2253,9 @@ GRAPHS
 	padding: 0;
 	width: 100%;
 	height: 38px;
-	background: url("../images/navBgMenu.png") repeat-x left top; 
+	background: url("../images/back_navbar.jpg") repeat-x left top; 
 	border-top: 1px solid black;
-	border-bottom: 1px solid #ff0000;
+	border-bottom: 1px solid #a2daff;
 	padding-top: 10px;
 }
 .sf-navbar li ul {
@@ -2062,9 +2288,11 @@ padding: 0;
 	margin: 0;
 	margin-right: 3px;
 }
-.sf-navbar ul li.sfHover{
-	background: url("../images/subbutton_active_red.jpg") repeat-x left top;
-	border: 1px solid #ff0000;
+
+
+.sf-navbar ul li.sfHover{ 
+	background: url("../images/subbutton_active_blue.jpg") repeat-x left top;
+	border: 1px solid #A2DAFF;
 	-moz-box-shadow: inset 0 1px 2px black;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -2144,7 +2372,7 @@ border: none;
 	background: #383838;
 }
 .setting li a:hover, .setting li a:active, .setting li a:focus  {
-	background: #8e0017;
+	background: #06215e;
 
 }
 .setting li ul{
@@ -2169,13 +2397,13 @@ border: none;
 -webkit-border-radius:0px;
 }
 .setting  li:hover, .setting li.sfHover, .setting  a:focus, .setting  a:hover, .setting  a:active{
-	background: #8e0017;
+	background: #06215e;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px 
 }
 
 .loader{
-	background: url(../images/overlayBg.jpg) repeat-x top left;
+	background: url("../images/overlaybg.jpg") repeat-x top left;
 	width: 402px;
 	height: 190px;
 	padding-top: 10px;
@@ -2188,7 +2416,7 @@ border: none;
 }
 .processbg {
 	padding-top: 30px;
-	background:url('../images/loadingbg.png') no-repeat top left;
+	background:url("../images/loadingbg.jpg") no-repeat top left;
 	width: 343px;
 	height: 99px;
 	margin: 0 auto;
@@ -2203,54 +2431,5 @@ border: none;
 	margin: 0 auto;
 }
 
-
-
-
-/* import css for report on rikkes  */
-
-
-	.scroll-pane { overflow: auto; width: 100%; float:left; }
-	.scroll-content { width: 2440px; float: left; }
-	.scroll-content-item { width: 100px; height: 100px; float: left; margin: 10px; font-size: 3em; line-height: 96px; text-align: center; }
-	* html .scroll-content-item { display: inline; } /* IE6 float double margin bug */
-	.scroll-bar-wrap { clear: left; padding: 0 4px 0 2px; margin: 0 -1px -1px -1px; }
-	.scroll-bar-wrap .ui-slider { background: none; border:0; height: 2em; margin: 0 auto;  }
-	.scroll-bar-wrap .ui-handle-helper-parent { position: relative; width: 100%; height: 100%; margin: 0 auto; }
-	.scroll-bar-wrap .ui-slider-handle { top:.2em; height: 1.5em; }
-	.scroll-bar-wrap .ui-slider-handle .ui-icon { margin: -8px auto 0; position: relative; top: 50%; }
-
-/*   tootip for report on rikkes */
-
-#popitmenu{
-position: absolute;
-background-color: white;
-border:1px solid black;
-font: normal 12px Verdana;
-line-height: 18px;
-z-index: 100;
-visibility: hidden;
-}
-
-#popitmenu a{
-text-decoration: none;
-padding-left: 6px;
-color: black;
-display: block;
-}
-
-#popitmenu a:hover{ /*hover background color*/
-background-color: #CCFF9D;
-}
-
-/* help */
-
-.help img { display: block; margin-left: auto; margin-right: auto; }
-.help .imgdesc { text-align: center; }
-.help ul { margin: 0px 0px 10px 30px; }
-.help ul li { list-style-type: disc; margin-bottom: 5px; }
-
-
-
-/* Membership */
 
 
